@@ -11,6 +11,7 @@
     "db:generate": "prisma generate"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.100.1",
     "@auth/prisma-adapter": "^2.11.2",
     "@prisma/client": "^6.0.0",
     "@telnyx/webrtc": "^2.26.4",
