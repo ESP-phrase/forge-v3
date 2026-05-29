@@ -16,7 +16,9 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "not signed in" }, { status: 401 });
   }
   const siteId = Number(req.nextUrl.searchParams.get("siteId"));
-  if (!siteId) return NextResponse.json({ error: "missing siteId" }, { status: 400 });
+  if (!siteId || !Number.isFinite(siteId) || siteId <= 0) {
+    return NextResponse.json({ error: "missing siteId" }, { status: 400 });
+  }
 
   const [site, articles] = await Promise.all([
     prisma.site.findUnique({ where: { id: siteId }, select: { minWordCount: true } }),

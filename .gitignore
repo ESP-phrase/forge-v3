@@ -11,3 +11,5 @@ prisma/data/
 .claude/
 tsconfig.tsbuildinfo
 next-env.d.ts
+
+.vercel

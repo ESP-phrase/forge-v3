@@ -7,7 +7,7 @@
  */
 import { createLLMClient, resolveModel } from "@/lib/llmClient";
 
-const MODEL = "claude-haiku-4-5-20251001";
+const MODEL = "gemini-2.5-flash";
 
 export type ArticleRecord = {
   id: number;
