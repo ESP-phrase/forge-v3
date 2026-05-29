@@ -1,0 +1,13 @@
+node_modules/
+.next/
+.env
+.env.local
+.env.*.local
+.env.vercel*
+.vercel/
+*.log
+prisma/.cache/
+prisma/data/
+.claude/
+tsconfig.tsbuildinfo
+next-env.d.ts
