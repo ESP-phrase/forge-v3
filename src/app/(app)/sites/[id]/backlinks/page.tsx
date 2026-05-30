@@ -46,7 +46,7 @@ export default async function BacklinksPage({
         title={`Backlinks · ${site.name}`}
         subtitle={
           <>
-            Find resource-page prospects, get AI-scored linkability, draft
+            Find resource-page prospects, get -scored linkability, draft
             personalised outreach. &nbsp; · &nbsp;{" "}
             <Link href={`/sites/${siteId}`}>back to site</Link>
           </>

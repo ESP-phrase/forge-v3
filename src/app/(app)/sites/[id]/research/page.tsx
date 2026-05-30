@@ -29,7 +29,7 @@ export default async function ResearchPage({
       <Card>
         <CardTitle
           title="Generate keyword candidates"
-          desc="AI proposes long-tail keywords a new domain can realistically rank for"
+          desc="Keyword research finds long-tail candidates a new domain can realistically rank for"
         />
         <ResearchForm siteId={siteId} />
       </Card>

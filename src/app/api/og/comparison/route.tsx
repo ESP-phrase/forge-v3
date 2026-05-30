@@ -27,7 +27,7 @@ const AFTER = {
   label: "With SEOForge",
   rows: [
     { kpi: "$0.30", text: "per 1,500-word article" },
-    { kpi: "30 sec", text: "AI generates + publishes" },
+    { kpi: "30 sec", text: " generates + publishes" },
     { kpi: "Auto", text: "SERP gap analysis built in" },
     { kpi: "Auto", text: "WordPress publish + FAQ schema" },
     { kpi: "Auto", text: "internal linking across cluster" },

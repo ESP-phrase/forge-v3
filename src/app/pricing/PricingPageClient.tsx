@@ -34,8 +34,8 @@ const TIERS: Tier[] = [
     articles: "75 articles / mo",
     sites: "3 sites",
     features: [
-      "AI keyword research",
-      "AI-powered article generation",
+      "Keyword research",
+      "Article generation",
       "Quality gates + drafts review",
       "WordPress auto-publish",
       "Activity log + cost tracking",
@@ -78,7 +78,7 @@ const TIERS: Tier[] = [
       "Google Search Console integration",
       "White-label client reports",
       "Team seats (up to 5)",
-      "Priority AI capacity",
+      "Priority generation",
       "API access",
       "Slack support · 4h",
       "Overage $0.15 / article",
@@ -88,12 +88,12 @@ const TIERS: Tier[] = [
 
 const COMPARE: { label: string; values: (string | boolean)[] }[] = [
   { label: "WordPress auto-publish", values: [true, true, true] },
-  { label: "AI keyword research", values: [true, true, true] },
+    { label: "Keyword research", values: [true, true, true] },
   { label: "SERP gap analysis", values: [true, true, true] },
   { label: "Internal linking", values: [true, true, true] },
   { label: "Page-view analytics", values: [false, true, true] },
   { label: "Google Search Console", values: [false, false, true] },
-  { label: "Backlink outreach AI drafts", values: [false, true, true] },
+    { label: "Backlink outreach emails", values: [false, true, true] },
   { label: "Daily cron auto-publish", values: [false, true, true] },
   { label: "Team seats", values: ["1", "3", "up to 5"] },
   { label: "Support SLA", values: ["Community", "Email · 24h", "Slack · 4h"] },
@@ -101,20 +101,11 @@ const COMPARE: { label: string; values: (string | boolean)[] }[] = [
 
 const FAQ = [
   {
-    q: "Do I bring my own AI keys, or is it included?",
-    a: "All paid plans include managed AI capacity — no API key needed. We absorb the cost of generation as part of your plan.",
-  },
-  {
-    q: "Can I exceed my monthly cap?",
-    a: "Yes — overage is $0.45/article on Creator, $0.30/article on Operator, $0.15/article on Agency. We notify at 80% so nothing catches you by surprise.",
-  },
-  {
-    q: "What's the $1 hold?",
-    a: "When you start a trial we charge a small upfront fee — $1 on Creator, $10 on Operator, $30 on Agency — to prevent abuse and confirm intent. You get 3 days of full premium access. Cancel before day 3 and you're never charged the monthly rate.",
-  },
-  {
-    q: "Is the content actually good, or is it generic AI slop?",
-    a: "Every article is built from real SERP analysis, runs through quality gates (word count, headings, FAQ, schema, internal links), and uses top-tier AI — not a cheap model. Generic AI tools produce 600-word fluff; SEOForge produces 1,500-word articles with TL;DR boxes, callouts, comparison tables, and pull-quotes.",
+    q: "Do I need my own API keys, or is it included?",
+    a: "All paid plans include managed generation capacity — no extra setup. We handle the entire pipeline as part of your plan.",
+
+    q: "Is the content actually good, or is it generic blog spam?",
+    a: "Every article is built from real SERP analysis, runs through quality gates (word count, headings, FAQ, schema, internal links), and reads like a human wrote it. Generic tools produce 600-word fluff; we deliver 1,500-word articles with TL;DR boxes, callouts, comparison tables, and pull-quotes.",
   },
   {
     q: "Cancel anytime?",

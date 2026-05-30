@@ -17,7 +17,7 @@ type Entry = { sha: string; date: string; title: string; body: string };
 /**
  * Read recent git commits at build time. We deliberately filter out
  * commits whose authors include "Claude" / "Co-Authored-By: Claude" — those
- * are AI-pair-programming commits and not customer-facing. We also strip the
+ * are -pair-programming commits and not customer-facing. We also strip the
  * Co-Authored-By footer from the body before display.
  *
  * Falls back to a static seed list if `git` isn't available (e.g. Vercel's
@@ -30,7 +30,7 @@ function loadEntries(): Entry[] {
     const repoDir = fs.existsSync(path.join(cwd, ".git")) ? cwd : path.dirname(cwd);
 
     const raw = execSync(
-      'git log -50 --pretty=format:"%h|%aI|%s|%b<<COMMIT_END>>"',
+      'git log -50 --pretty=format:"%h|%|%s|%b<<COMMIT_END>>"',
       { cwd: repoDir, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
     );
     const entries: Entry[] = raw
@@ -54,7 +54,7 @@ function loadEntries(): Entry[] {
         sha: "init",
         date: new Date().toISOString(),
         title: "SEOForge launched",
-        body: "AI SEO content pipeline with WordPress + native publishing, GSC, Stripe, custom domains, cluster planning, and more.",
+        body: " SEO content pipeline with WordPress + native publishing, GSC, Stripe, custom domains, cluster planning, and more.",
       },
     ];
   }

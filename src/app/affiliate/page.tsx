@@ -91,7 +91,7 @@ export default function AffiliatePage() {
               "SEO content creators on X / YouTube / LinkedIn",
               "Niche-site operators with audiences (Doc Sheldon, IndieHackers, etc.)",
               "Marketing agencies recommending tools to clients",
-              "Newsletter writers in marketing, content, or AI",
+              "Newsletter writers in marketing, content, or ",
               "WordPress / web dev consultants",
               "SaaS founders selling complementary tools",
             ].map((aud) => (

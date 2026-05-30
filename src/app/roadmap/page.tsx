@@ -21,14 +21,14 @@ type Item = {
 
 const ROADMAP: Item[] = [
   // ─── LIVE ───
-  { title: "AI article generation", body: "SERP gap analysis, internal linking, FAQ schema, quality gates.", status: "live" },
+  { title: " article generation", body: "SERP gap analysis, internal linking, FAQ schema, quality gates.", status: "live" },
   { title: "WordPress auto-publish via REST API", body: "Application Passwords encrypted with AES-256-GCM.", status: "live" },
   { title: "Native blog hosting", body: "Publish to /blog/<slug> on your own custom domain — no WordPress required.", status: "live" },
   { title: "Custom domain attach via Vercel API", body: "One-click domain connect with DNS instructions + SSL auto-provisioning.", status: "live" },
   { title: "Topic cluster planner", body: "1 pillar + 12 articles, auto-linked, queued in one click.", status: "live" },
   { title: "Google Search Console integration", body: "Real impressions, clicks, queries, avg position per article.", status: "live" },
-  { title: "Backlink outreach workbench", body: "Resource-page search + AI-drafted pitch emails.", status: "live" },
-  { title: "HARO / source-request drafter", body: "Paste a reporter query, AI writes a quotable response.", status: "live" },
+  { title: "Backlink outreach workbench", body: "Resource-page search + -drafted pitch emails.", status: "live" },
+  { title: "HARO / source-request drafter", body: "Paste a reporter query,  writes a quotable response.", status: "live" },
   { title: "Anchor-text diversity analyzer", body: "Import backlinks, see if your profile looks risky to Google.", status: "live" },
   { title: "SEO scorecard per article", body: "12-check on-page audit with letter grades.", status: "live" },
   { title: "Per-site theme colors", body: "4-color palette per site, 6 named presets, applied to every article.", status: "live" },
@@ -38,12 +38,12 @@ const ROADMAP: Item[] = [
   // ─── NOW (building) ───
   { title: "Welcome + low-credit emails (Resend)", body: "Transactional emails for new signups and credit-low warnings.", status: "now" },
   { title: "Affiliate program", body: "30% recurring for 12 months. Self-serve signup, referral link, dashboard.", status: "now" },
-  { title: "Manual blog content for seoforge.org", body: "Hand-written cornerstone articles on AI SEO, programmatic SEO, niche-site playbooks.", status: "now" },
+  { title: "Manual blog content for seoforge.org", body: "Hand-written cornerstone articles on  SEO, programmatic SEO, niche-site playbooks.", status: "now" },
 
   // ─── NEXT (planned, next 30 days) ───
   { title: "Stripe live mode", body: "Move from test mode to real charges once trial flow is fully verified.", status: "next" },
   { title: "Microsoft OAuth login", body: "Adds Office 365 / Outlook coverage for agency users.", status: "next" },
-  { title: "Inline article editor", body: "Edit AI's output in-app before publishing instead of WordPress.", status: "next" },
+  { title: "Inline article editor", body: "Edit 's output in-app before publishing instead of WordPress.", status: "next" },
   { title: "Automatic article refresh suggestions", body: "Score-driven recommendations: 'this 6-month-old article will rank if you regenerate'.", status: "next" },
   { title: "Multi-language content generation", body: "Spanish, German, French, Portuguese to start.", status: "next" },
   { title: "Stripe usage-based billing", body: "Pay-per-article tier for users between Hobby and Operator.", status: "next" },

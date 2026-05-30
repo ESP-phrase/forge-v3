@@ -11,7 +11,7 @@ import { PageTracker } from "@/components/PageTracker";
 
 const SITE = "https://www.seoforge.org";
 const SITE_NAME = "SEOForge";
-const DEFAULT_TITLE = "SEOForge — AI SEO content on autopilot";
+const DEFAULT_TITLE = "SEOForge — SEO content on autopilot";
 const DEFAULT_DESC =
   "Generate, optimize, and auto-publish SEO articles to WordPress and native blogs. Topic clusters, schema, internal linking, GSC, and analytics — built for indie operators and agencies.";
 const OG_IMAGE = `${SITE}/opengraph-image`;
@@ -25,14 +25,14 @@ export const metadata: Metadata = {
   description: DEFAULT_DESC,
   applicationName: SITE_NAME,
   keywords: [
-    "AI SEO",
-    "AI content generation",
+    "SEO content",
+    "content generation",
     "WordPress auto-publish",
     "programmatic SEO",
     "SEO automation",
     "topic clusters",
-    "AI article writer",
-    "SEO content tool",
+    "article writer",
+    "SEO tool",
     "niche site automation",
   ],
   authors: [{ name: "SEOForge" }],

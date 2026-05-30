@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Features — Topic clusters, GSC, auto-publish, anchor analysis",
   description:
-    "Every SEO feature SEOForge ships: AI cluster planner, SERP gap analysis, WordPress auto-publish, Google Search Console, anchor-text diversity, backlink outreach, internal linking, schema markup.",
+    "Every SEO feature SEOForge ships: cluster planner, SERP gap analysis, WordPress auto-publish, Google Search Console, anchor-text diversity, backlink outreach, internal linking, schema markup.",
   alternates: { canonical: "/features" },
 };
 
@@ -18,12 +18,12 @@ const FEATURES = [
     body: "One dashboard for unlimited WordPress sites. Each site has its own niche, audience, expert voice, daily cap, and credentials — all stored encrypted at rest.",
   },
   {
-    title: "AI keyword research",
-    body: "Paste a seed term. AI proposes 30+ long-tail candidates with intent tags that a new domain can realistically rank for in 3-6 months.",
+    title: "Keyword research",
+    body: "Paste a seed term. We find 30+ long-tail candidates with intent tags that a new domain can realistically rank for in 3-6 months.",
   },
   {
     title: "Article generator",
-    body: "Top-tier AI writes the post with H2/H3 structure, FAQ, JSON-LD schema, category, and tags. Internal linking happens automatically against your past articles.",
+    body: "Every article ships with H2/H3 structure, FAQ, JSON-LD schema, category, and tags. Internal linking happens automatically against your past articles.",
   },
   {
     title: "Quality gates",
@@ -39,7 +39,7 @@ const FEATURES = [
   },
   {
     title: "Cost tracking",
-    body: "Every article logs token cost in the database. See per-site monthly spend on AI at a glance.",
+    body: "See your per-site monthly spend at a glance. Every article's cost is logged to the cent.",
   },
   {
     title: "Activity log",

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const FEATURES = [
   { icon: <SearchIcon />, t: "Research smarter", b: "Find winning keywords and analyze SERPs in seconds." },
-  { icon: <PencilIcon />, t: "Create faster", b: "Write, optimize, and score content with AI." },
+  { icon: <PencilIcon />, t: "Create faster", b: "Write, optimize, and score content with ." },
   { icon: <SendIcon />, t: "Publish confidently", b: "Publish across sites with ease." },
   { icon: <BarsIcon />, t: "Track results", b: "Monitor rankings, traffic, and ROI in real time." },
 ];

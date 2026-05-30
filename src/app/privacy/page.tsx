@@ -40,7 +40,7 @@ export default function PrivacyPage() {
             <ul className="list-disc ml-5 space-y-1 text-muted">
               <li><strong className="text-text">Account data:</strong> email address, name, and a profile photo URL if you sign in with Google or X.</li>
               <li><strong className="text-text">WordPress credentials:</strong> if you connect a WordPress site, we store the URL, username, and an encrypted application password (AES-256-GCM). We never see the plaintext after submission.</li>
-              <li><strong className="text-text">Generated content:</strong> articles, keywords, and metadata produced by the AI pipeline. You own this content.</li>
+              <li><strong className="text-text">Generated content:</strong> articles, keywords, and metadata produced by the  pipeline. You own this content.</li>
               <li><strong className="text-text">Billing info:</strong> if you subscribe, Stripe processes your card. We store only the Stripe customer ID and subscription state — not card numbers.</li>
               <li><strong className="text-text">Usage data:</strong> requests, costs, error logs needed to run the service.</li>
               <li><strong className="text-text">Behavioral analytics:</strong> Microsoft Clarity records anonymized session replays and heatmaps. No keystroke or password capture.</li>

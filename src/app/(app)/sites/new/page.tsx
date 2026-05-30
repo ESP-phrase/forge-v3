@@ -97,7 +97,7 @@ export default async function NewSitePage({
                   Expert voice matters
                 </div>
                 <div className="text-muted text-xs mt-0.5 leading-snug">
-                  The more specific, the better the AI can write in your voice.
+                  The more specific, the better the content will match your voice.
                 </div>
               </div>
             </li>

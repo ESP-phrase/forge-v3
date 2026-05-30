@@ -319,7 +319,7 @@ export default async function HomePage({
     <>
       <Hero
         title="SEO Dashboard"
-        subtitle="Multi-site AI content pipeline · published, queued, and in-progress at a glance"
+        subtitle="Multi-site SEO content pipeline · published, queued, and in-progress at a glance"
         right={
           <>
             <LinkButton href="/sites/new">+ Add site</LinkButton>

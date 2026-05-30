@@ -41,7 +41,7 @@ export default async function StartPage({ searchParams }: { searchParams: Promis
             <span className="text-accent">published while you sleep.</span>
           </h1>
           <p className="text-muted text-base md:text-lg mt-4 max-w-xl mx-auto">
-            Queue a keyword. AI writes a 1,500-word article and auto-publishes it to your WordPress site — in under 10 minutes.
+            Queue a keyword. We write a 1,500-word article and auto-publish it to your WordPress site — in under 10 minutes.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
             <LinkButton href={cta} size="lg">Start for $1 →</LinkButton>
@@ -78,7 +78,7 @@ export default async function StartPage({ searchParams }: { searchParams: Promis
         <section className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
           {[
             { n: "1", t: "Connect WordPress", b: "Site URL + Application Password. 60 seconds." },
-            { n: "2", t: "Queue keywords", b: "Or let AI research them for you." },
+            { n: "2", t: "Queue keywords", b: "We research and queue them for you." },
             { n: "3", t: "Articles publish daily", b: "Cron pushes live. You sleep — they rank." },
           ].map((s) => (
             <div

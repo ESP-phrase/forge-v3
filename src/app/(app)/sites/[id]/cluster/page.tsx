@@ -23,7 +23,7 @@ export default async function ClusterPlannerPage({ params }: { params: Promise<{
       <ClusterPlanner siteId={siteId} siteName={site.name} siteNiche={site.niche} />
 
       <div className="text-center text-muted text-xs uppercase tracking-wider font-bold my-5">
-        — or skip AI entirely —
+         — or type your own —
       </div>
 
       <ManualKeywordQueue siteId={siteId} />

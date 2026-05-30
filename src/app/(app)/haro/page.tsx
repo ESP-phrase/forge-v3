@@ -16,12 +16,12 @@ export default async function HaroPage() {
     <>
       <PageHeader
         title="Source request drafter"
-        subtitle="Paste a HARO / Connectively / Featured.com query — AI writes a source-worthy response in your expert voice"
+        subtitle="Paste a HARO / Connectively / Featured.com query — we draft a source-worthy response in your expert voice"
       />
       {sites.length === 0 ? (
         <Panel>
           <p className="text-muted text-sm">
-            Add a site first — the AI needs the site's expert voice and niche to draft good responses.
+            Add a site first — we need the site's expert voice and niche to draft good responses.
           </p>
         </Panel>
       ) : (

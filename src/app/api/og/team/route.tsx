@@ -16,7 +16,7 @@ export const runtime = "edge";
 
 const TEAM = [
   { initials: "AN", name: "Aubrey N.", role: "Founder · SEO Operator", color: "#bef848" },
-  { initials: "AI", name: "Claude", role: "AI Content Engineer", color: "#a855f7" },
+  { initials: "", name: "Claude", role: " Content Engineer", color: "#a855f7" },
   { initials: "WP", name: "WordPress", role: "Publishing Pipeline", color: "#0ea5e9" },
   { initials: "GS", name: "Search Console", role: "Performance Tracker", color: "#22c55e" },
 ];
@@ -88,7 +88,7 @@ export async function GET() {
             marginBottom: 48,
           }}
         >
-          Built by an operator. Powered by AI.
+          Built by an operator. Powered by .
         </div>
 
         {/* Team grid */}
@@ -165,7 +165,7 @@ export async function GET() {
           }}
         >
           <div style={{ display: "flex", fontSize: 22, color: "#9ca3af" }}>
-            Indie operator + AI · zero corporate fluff
+            Indie operator +  · zero corporate fluff
           </div>
           <div style={{ display: "flex", fontSize: 24, fontWeight: 800, color: "#bef848" }}>
             seoforge.org

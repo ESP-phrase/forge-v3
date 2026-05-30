@@ -173,7 +173,7 @@ export function ClusterPlanner({
               value={pillarTopic}
               onChange={(e) => setPillarTopic(e.target.value)}
               required
-              placeholder="e.g. 'how to write a resume that gets interviews' or 'AI SEO automation for niche sites'"
+              placeholder="e.g. 'how to write a resume that gets interviews' or ' SEO automation for niche sites'"
               className="w-full bg-bg border border-border rounded-lg px-3 py-2.5 text-sm text-text focus:outline-none focus:border-accent-border"
             />
             <p className="text-muted text-xs mt-1.5">

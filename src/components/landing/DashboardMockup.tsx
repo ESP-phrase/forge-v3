@@ -78,7 +78,7 @@ export function DashboardMockup({ variant = "hero" }: { variant?: "hero" | "show
                   <span className="text-accent">✦</span>
                 </div>
                 <div className="text-muted text-[0.6rem]">
-                  Multi-site AI content pipeline · published, queued, and in-progress at a glance
+                  Multi-site  content pipeline · published, queued, and in-progress at a glance
                 </div>
               </div>
               <div className="flex items-stretch gap-1.5 shrink-0">
@@ -316,7 +316,7 @@ function TopSitesPanel() {
       {[
         { n: "techflow.io",   color: "#fbbf24", score: 92, imp: "32.4K" },
         { n: "growthlab.co",  color: "#4ade80", score: 88, imp: "21.7K" },
-        { n: "contently.ai",  color: "#60a5fa", score: 85, imp: "18.9K" },
+        { n: "contently.",  color: "#60a5fa", score: 85, imp: "18.9K" },
         { n: "rankspire.com", color: "#fb923c", score: 82, imp: "14.2K" },
         { n: "seovista.dev",  color: "#a78bfa", score: 78, imp: "10.3K" },
       ].map((s, i) => (
@@ -351,7 +351,7 @@ function BuildLogPanel() {
   const entries: { t: string; site: string; title: string; status: BuildStatus }[] = [
     { t: "12:04:21", site: "techflow.io",   title: "best react component libraries 2026",      status: "published"  },
     { t: "12:03:58", site: "growthlab.co",  title: "how to scale paid acquisition past $1M",   status: "optimizing" },
-    { t: "12:03:12", site: "contently.ai",  title: "writing system prompts that actually work", status: "drafting"   },
+    { t: "12:03:12", site: "contently.",  title: "writing system prompts that actually work", status: "drafting"   },
     { t: "12:02:47", site: "rankspire.com", title: "site speed audits: a 2026 checklist",      status: "published"  },
     { t: "12:02:09", site: "seovista.dev",  title: "internal linking patterns that compound",  status: "optimizing" },
     { t: "12:01:33", site: "techflow.io",   title: "next.js 15 server actions in production",  status: "queued"     },

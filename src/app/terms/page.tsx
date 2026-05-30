@@ -46,7 +46,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-bold mb-2 text-text">3. What SEOForge does</h2>
             <p className="text-muted">
-              SEOForge generates SEO articles using AI (Anthropic Claude) and publishes
+              SEOForge generates SEO articles using  (Anthropic Claude) and publishes
               them to your WordPress site or our native blog hosting. We also offer
               keyword research, topic cluster planning, SEO scorecards, backlink
               outreach helpers, and Google Search Console integration.
@@ -63,7 +63,7 @@ export default function TermsPage() {
             </p>
             <p className="text-muted mt-2">
               You are responsible for the legal use of generated content — including
-              copyright, defamation, and disclosure requirements that apply to AI-generated
+              copyright, defamation, and disclosure requirements that apply to -generated
               material in your jurisdiction.
             </p>
           </section>
@@ -76,7 +76,7 @@ export default function TermsPage() {
               <li>Spam, scrape, or violate any other platform&apos;s terms (e.g. Google&apos;s Webmaster Guidelines, WordPress.com policies).</li>
               <li>Generate content that infringes copyright or trademarks you don&apos;t own.</li>
               <li>Reverse engineer or attempt to extract our prompts or model weights.</li>
-              <li>Resell SEOForge&apos;s output as your own AI service.</li>
+              <li>Resell SEOForge&apos;s output as your own  service.</li>
               <li>Bypass usage limits, share accounts, or use multiple free accounts to dodge billing.</li>
             </ul>
             <p className="text-muted mt-2">
@@ -97,9 +97,9 @@ export default function TermsPage() {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold mb-2 text-text">7. AI-generated content disclaimer</h2>
+            <h2 className="text-xl font-bold mb-2 text-text">7. -generated content disclaimer</h2>
             <p className="text-muted">
-              SEOForge uses third-party AI models (Anthropic Claude). Generated content
+              SEOForge uses third-party  models (Anthropic Claude). Generated content
               may contain inaccuracies, fabricated citations, or biased statements. You
               are responsible for reviewing all output before publishing. We do not
               guarantee SEO rankings, traffic, or revenue outcomes — search engine

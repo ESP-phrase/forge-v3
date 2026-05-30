@@ -11,9 +11,9 @@ import type { Metadata } from "next";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "AI SEO content on autopilot — generate, optimize, publish",
+  title: "SEO content on autopilot — generate, optimize, publish",
   description:
-    "SEOForge generates AI-optimized articles with Claude, runs SERP gap analysis, builds topic clusters, and auto-publishes to WordPress or native blogs. Start 3-day trial for $1.",
+    "SEOForge generates SEO-optimized articles, runs SERP gap analysis, builds topic clusters, and auto-publishes to WordPress or native blogs. Start 3-day trial for $1.",
   alternates: { canonical: "/" },
 };
 
@@ -31,7 +31,7 @@ export default async function LandingPage() {
         <div className="lg:col-span-5">
           <div className="inline-flex items-center gap-1.5 bg-accent-dim text-accent border border-accent-border rounded-full px-3 py-1 text-[0.7rem] uppercase tracking-wider font-bold">
             <SparkIcon size={12} className="text-accent" />
-            AI-powered SEO automation
+            SEO automation
           </div>
           <h1 className="text-5xl md:text-[4rem] font-extrabold tracking-tight leading-[1.05] mt-5">
             SEO articles,
@@ -104,7 +104,7 @@ export default async function LandingPage() {
           <Feature
             tone="lime"
             icon={<BoltIcon />}
-            title="AI Content Generation"
+            title="Content Generation"
             body="Create high-quality, SEO-optimized content in seconds."
           />
           <Feature
@@ -135,7 +135,7 @@ export default async function LandingPage() {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 opacity-80">
           {[
-            { n: "AI Article Generation", t: "Powered by OpenRouter" },
+            {           n: "Article Generation", t: "Powered by OpenRouter" },
             { n: "WordPress", t: "REST API" },
             { n: "Google Search Console", t: "Live data" },
             { n: "Next.js + Vercel", t: "Edge-fast" },
@@ -260,7 +260,7 @@ export default async function LandingPage() {
             {
               step: "02",
               title: "Queue keywords",
-              body: "Type a topic or let AI research keywords for you. Each one gets full SERP gap analysis so we know exactly how to rank it.",
+              body: "Type a topic. We research keywords, run SERP gap analysis so every article targets what actually ranks, and publish to WordPress automatically.",
             },
             {
               step: "03",
@@ -303,7 +303,7 @@ export default async function LandingPage() {
               features: [
                 "3 sites",
                 "75 articles / month",
-                "AI keyword research",
+                "Keyword research",
                 "WordPress auto-publish",
                 "Overage $0.45 / article",
               ],

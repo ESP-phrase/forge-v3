@@ -133,7 +133,7 @@ export default async function SiteDetailPage({
             title="Add keywords"
             right={
               <Link href={`/sites/${site.id}/research`} className="text-sm">
-                ⚡ AI research
+                Keyword research
               </Link>
             }
           />

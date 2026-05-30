@@ -25,7 +25,7 @@ const SECTIONS: { title: string; lines: string[] }[] = [
     title: "Ad text — feature / value hooks",
     lines: [
       "75 ranked articles to your WordPress site, on autopilot, every month.",
-      "Stop writing. AI publishes 75 ranked articles a month.",
+      "Stop writing. Get 75 ranked articles published a month.",
       "Your niche site on autopilot. 75 ranked articles a month.",
       "Rank #1 without writing a word.",
       "Your WordPress site, autopublished daily.",
@@ -75,7 +75,7 @@ const SECTIONS: { title: string; lines: string[] }[] = [
   {
     title: "Microsoft Search Ads — high-intent keyword headlines (under 30 chars each)",
     lines: [
-      "AI Writes Your Blog Posts",
+      "Auto-Publish Blog Posts to WordPress",
       "75 SEO Articles a Month",
       "WordPress on Autopilot",
       "Skip the Writing. Rank.",
@@ -89,7 +89,7 @@ const SECTIONS: { title: string; lines: string[] }[] = [
     title: "Microsoft Search Ads — descriptions (under 90 chars each)",
     lines: [
       "Auto-publish 75 SEO articles to your WordPress site every month. $1 trial. Cancel anytime.",
-      "AI writes SERP-optimized articles + publishes to WordPress. Start for $1. 3-day trial.",
+      "SERP-optimized articles auto-published to WordPress. Start for $1. 3-day trial.",
       "Stop juggling 6 SEO tools. One workspace handles research, writing, publishing, tracking.",
       "1,000+ operators publishing 75+ ranked articles a month. Start for $1, cancel before day 3.",
     ],

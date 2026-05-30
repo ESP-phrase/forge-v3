@@ -28,7 +28,7 @@ export function ManualKeywordQueue({ siteId }: { siteId: number }) {
           </div>
         </div>
         <span className="text-[0.6rem] font-extrabold uppercase tracking-wider text-accent bg-accent-dim border border-accent-border rounded px-2 py-1">
-          No AI needed
+          No  needed
         </span>
       </div>
       <form

@@ -4,7 +4,7 @@ import { ImageResponse } from "next/og";
 // social card previews (Twitter, LinkedIn, Slack, iMessage, etc.).
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "SEOForge — AI SEO content on autopilot";
+export const alt = "SEOForge —  SEO content on autopilot";
 
 export default function OGImage() {
   return new ImageResponse(
@@ -102,7 +102,7 @@ export default function OGImage() {
             marginBottom: 56,
           }}
         >
-          Generate, optimize, and publish AI articles to WordPress and native blogs.
+          Generate, optimize, and publish  articles to WordPress and native blogs.
           Topic clusters, schema, internal linking.
         </div>
 

@@ -65,7 +65,7 @@ export async function GET() {
             marginBottom: 32,
           }}
         >
-          AI-POWERED SEO AUTOMATION
+          -POWERED SEO AUTOMATION
         </div>
 
         {/* Headline */}
@@ -95,7 +95,7 @@ export async function GET() {
             marginBottom: 80,
           }}
         >
-          Generate, optimize, and publish AI content across unlimited sites — from one dashboard.
+          Generate, optimize, and publish  content across unlimited sites — from one dashboard.
         </div>
 
         {/* Stat row */}

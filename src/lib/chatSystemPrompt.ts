@@ -24,7 +24,7 @@ Annual billing saves ~20%. Cancel anytime before day 3 — small fee already cha
 
 ## Key differentiators
 
-- **Built on Google Gemini** — strong, fast model that writes better than budget alternatives. Free for SEOForge to run.
+- **Every article gets SERP analysis** before writing — articles win because they answer search intent, not because they stuff keywords.
 - **Real SERP analysis** before writing — articles win because they answer search intent better, not because they stuff keywords.
 - **Visual formatting baked in** — every article has TL;DR boxes, callout cards, pull-quotes, comparison tables, stat rows. Looks like a human wrote it.
 - **WordPress auto-publish** with FAQ schema, JSON-LD, hero image (Unsplash), internal links to the site's other articles, author bio.
@@ -34,7 +34,7 @@ Annual billing saves ~20%. Cancel anytime before day 3 — small fee already cha
 ## Common questions
 
 **"Is the content actually good or generic AI slop?"**
-Google Gemini writes the article with SERP gap analysis + quality gates (word count, headings, FAQ, schema, internal links) means articles read well and convert. Drafts that fail quality gates aren't published.
+SERP gap analysis + quality gates + quality gates (word count, headings, FAQ, schema, internal links) means articles read well and convert. Drafts that fail quality gates aren't published.
 
 **"Will Google penalize AI content?"**
 Google penalises low-quality content, not AI specifically. SEOForge generates content that meets E-E-A-T signals — author bios, schema, citations, originality from SERP gaps. Recommendation: 1-3 articles/day on a new domain.

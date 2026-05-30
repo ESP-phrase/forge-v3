@@ -25,10 +25,10 @@ const SECTIONS = [
   {
     h: "Working with content",
     items: [
-      ["AI keyword research", "Use the ⚡ AI research panel to brainstorm long-tail candidates."],
+      [" keyword research", "Use the ⚡  research panel to brainstorm long-tail candidates."],
       ["Quality gates", "min_word_count and FAQ checks hold weak articles back as drafts."],
       ["Internal linking", "Auto-applied on publish. Bias toward longer, more-specific phrases."],
-      ["Categories and tags", "AI assigns one category and 3–6 tags per article. Created in WP on first use."],
+      ["Categories and tags", " assigns one category and 3–6 tags per article. Created in WP on first use."],
     ],
   },
   {
@@ -42,7 +42,7 @@ const SECTIONS = [
   {
     h: "Self-hosting",
     items: [
-      ["Local dev", "SQLite + Resend + your AI provider key. No external DB needed."],
+      ["Local dev", "SQLite + Resend + your  provider key. No external DB needed."],
       ["Vercel + Neon", "Switch the Prisma provider to postgresql, set Vercel env vars, push."],
       ["Backups", "Copy prisma/data/dev.db. For production, use Neon&rsquo;s point-in-time restore."],
     ],

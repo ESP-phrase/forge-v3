@@ -87,7 +87,7 @@ export function BacklinksWorkbench({
       {/* Search form */}
       <Panel
         title="Find new prospects"
-        subtitle="Searches resource-page intent queries (best X resources, top Y blogs, etc.) and AI-scores each result."
+        subtitle="Searches resource-page intent queries (best X resources, top Y blogs, etc.) and -scores each result."
       >
         <form onSubmit={handleFind} className="flex flex-wrap gap-3 items-end">
           <div className="flex-1 min-w-[20rem]">

@@ -77,8 +77,8 @@ export default async function AffiliateDashboardPage() {
         </p>
         <CopyRow label="Your link" value={link} />
         <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
-          <CopyRow label="Operator pitch" compact value={`Just found this AI SEO tool that auto-publishes to WordPress. Wild quality. Try free → ${link}`} />
-          <CopyRow label="X/Twitter" compact value={`Stopped writing blog content. AI handles it now → ${link}`} />
+          <CopyRow label="Operator pitch" compact value={`Just found this SEO tool that auto-publishes to WordPress. Wild quality. Try free → ${link}`} />
+          <CopyRow label="X/Twitter" compact value={`Stopped writing blog content. This tool handles it now → ${link}`} />
           <CopyRow label="Plain URL" compact value={link} />
         </div>
       </Panel>

@@ -83,7 +83,7 @@ export async function GET() {
             marginBottom: 60,
           }}
         >
-          Generate, optimize, and publish SEO content at scale — while AI handles the heavy lifting.
+          Generate, optimize, and publish SEO content at scale — while  handles the heavy lifting.
         </div>
 
         {/* Stat row */}
