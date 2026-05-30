@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { signIn, signOut } from "@/lib/auth";
 
 async function createSessionCookie(userId: string): Promise<void> {
@@ -15,11 +16,7 @@ async function createSessionCookie(userId: string): Promise<void> {
   const isProd = process.env.NODE_ENV === "production";
   const cookieStore = await cookies();
   cookieStore.set(isProd ? "__Secure-authjs.session-token" : "authjs.session-token", sessionToken, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: isProd,
-    expires,
-    path: "/",
+    httpOnly: true, sameSite: "lax", secure: isProd, expires, path: "/",
   });
 }
 
@@ -30,11 +27,6 @@ function parseCredentials(formData: FormData): { email: string; password: string
   return { email, password };
 }
 
-/**
- * Pull a safe ?next= target from the form. We only allow same-origin relative
- * paths so a malicious ?next=https://evil/ can't be used to redirect victims
- * after they sign in. Defaults to /dashboard.
- */
 function safeNext(formData: FormData): string {
   const raw = String(formData.get("next") ?? "").trim();
   if (!raw) return "/dashboard";
@@ -49,6 +41,40 @@ function maskEmail(e?: string | null): string {
   return `${u.slice(0, 2)}***@${d}`;
 }
 
+async function runSignupSideEffects(user: { id: string; email: string; name?: string | null }) {
+  const { prisma } = await import("@/lib/db");
+  // Referral attribution
+  try {
+    const { cookies } = await import("next/headers");
+    const c = await cookies();
+    const refCode = c.get("sf_ref")?.value;
+    if (refCode) {
+      const referrer = await prisma.user.findUnique({ where: { referralCode: refCode } });
+      if (referrer && referrer.id !== user.id) {
+        await prisma.user.update({ where: { id: user.id }, data: { referredBy: refCode } });
+        await prisma.referral.create({ data: { referrerId: referrer.id, referredId: user.id } });
+      }
+    }
+  } catch { /* noop */ }
+  // Welcome email
+  try {
+    const { sendWelcomeEmail } = await import("@/lib/email");
+    void sendWelcomeEmail(user.email, user.name);
+  } catch { /* noop */ }
+  // Conversion pixels
+  try {
+    const { sendRedditEvent } = await import("@/lib/redditCapi");
+    await sendRedditEvent({ eventName: "SignUp", email: user.email, userId: user.id });
+    await sendRedditEvent({ eventName: "Lead", email: user.email, userId: user.id });
+  } catch { /* noop */ }
+  try {
+    const { sendTikTokEvent } = await import("@/lib/tiktokCapi");
+    await sendTikTokEvent({
+      eventName: "CompleteRegistration", email: user.email, userId: user.id, eventId: `signup_${user.id}`,
+    });
+  } catch { /* noop */ }
+}
+
 export async function signUpAction(formData: FormData): Promise<void> {
   const t0 = Date.now();
   const reqId = Math.random().toString(36).slice(2, 8);
@@ -56,9 +82,26 @@ export async function signUpAction(formData: FormData): Promise<void> {
   const creds = parseCredentials(formData);
   console.log(`[signup ${reqId}] start email=${maskEmail(creds?.email)} next=${next}`);
   if (!creds) {
-    console.log(`[signup ${reqId}] invalid creds, bouncing`);
     redirect(`/login?mode=signup&error=${encodeURIComponent("Enter a valid email and a password of at least 8 characters.")}`);
   }
+  const { prisma } = await import("@/lib/db");
+  const bcrypt = (await import("bcryptjs")).default;
+
+  const existing = await prisma.user.findUnique({ where: { email: creds!.email } });
+  if (existing) {
+    redirect(`/login?error=${encodeURIComponent("An account with that email already exists. Sign in instead.")}`);
+  }
+
+  const passwordHash = await bcrypt.hash(creds!.password, 12);
+  const name = String(formData.get("name") ?? "").trim() || null;
+  const user = await prisma.user.create({ data: { email: creds!.email, name, passwordHash } });
+
+  await runSignupSideEffects(user);
+  await createSessionCookie(user.id);
+  await prisma.user.update({ where: { id: user.id }, data: { lastLogin: new Date() } });
+  console.log(`[signup ${reqId}] created user=${user.id} in ${Date.now() - t0}ms → redirect ${next}`);
+  redirect(next);
+}
   const { prisma } = await import("@/lib/db");
   const bcrypt = (await import("bcryptjs")).default;
 

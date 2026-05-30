@@ -16,13 +16,20 @@ export const metadata: Metadata = {
 // Cold-traffic landing for TikTok ads. Compressed to a single viewport
 // (hero + tight social-proof band + footer) so the CTA stays visible
 // without scrolling — TikTok-clickers bounce on long pages.
-export default function StartPage() {
+export default async function StartPage({ searchParams }: { searchParams: Promise<{ captured?: string }> }) {
+  const sp = await searchParams;
+  const captured = sp.captured === "1";
   const cta = "/pricing?utm_content=start_page";
   return (
     <div className="min-h-screen bg-bg text-text flex flex-col">
       <MarketingHeader />
 
       <main className="flex-1 max-w-[1100px] w-full mx-auto px-6 md:px-10 py-6 md:py-10 flex flex-col">
+        {captured ? (
+          <div className="text-center bg-accent-dim border border-accent-border rounded-2xl p-6 mb-6 text-accent font-semibold">
+            Got it! Check your inbox for a free SEO audit.
+          </div>
+        ) : null}
         {/* Hero — fits above the fold on every viewport */}
         <section className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-1.5 bg-accent-dim text-accent border border-accent-border rounded-full px-3 py-1 text-[0.65rem] uppercase tracking-wider font-bold mb-4">
@@ -87,6 +94,33 @@ export default function StartPage() {
               </div>
             </div>
           ))}
+        </section>
+
+        {/* Secondary CTA — email capture for visitors not ready to buy */}
+        <section className="mt-8 md:mt-10 text-center max-w-md mx-auto w-full">
+          <div className="bg-card-grad border border-border rounded-2xl p-6">
+            <h2 className="text-sm font-extrabold text-text mb-1">
+              Not ready? Get a free SEO audit.
+            </h2>
+            <p className="text-muted text-xs mb-4">
+              Paste your URL — we'll scan it and email you a 3-minute report.
+            </p>
+            <form action="/api/lead" method="POST" className="flex gap-2">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="you@example.com"
+                className="flex-1 px-3 py-2.5 bg-bg border border-border rounded-xl text-sm text-text focus:outline-none focus:border-accent-border placeholder:text-muted-2"
+              />
+              <button
+                type="submit"
+                className="px-4 py-2.5 bg-accent text-black rounded-xl text-sm font-extrabold hover:brightness-110 transition-all shrink-0"
+              >
+                Send report
+              </button>
+            </form>
+          </div>
         </section>
       </main>
 

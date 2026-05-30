@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { MarketingHeader } from "@/components/marketing/MarketingHeader";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 import { LinkButton } from "@/components/Button";
+import { LockIcon } from "@/components/Icons";
 import { startCheckoutAction } from "@/actions/billing";
 
 type Tier = {
@@ -156,6 +157,10 @@ export default function PricingPageClient() {
           <p className="text-muted text-base mt-3">
             3-day trial · cancel anytime before day 3 · monthly billing starts after.
           </p>
+          <div className="inline-flex items-center gap-2 mt-3 bg-surface border border-border rounded-full px-4 py-1.5 text-xs text-muted">
+            <LockIcon className="text-accent" />
+            7-day money-back guarantee · Secured by Stripe
+          </div>
           <Suspense fallback={null}>
             <PricingErrorBanner />
           </Suspense>
