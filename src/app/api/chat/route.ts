@@ -1,13 +1,10 @@
 /**
- * Chat endpoint for the floating widget. Streams responses from Claude via
- * OpenRouter using server-sent events so the UI can render tokens as they
- * arrive instead of waiting for the full reply.
+ * Chat endpoint for the floating widget. Streams responses from DeepSeek via
+ * OpenRouter using server-sent events.
  *
- * Model: Haiku 4.5 — fast (~1s first token), cheap (~$0.005/conversation
- * at typical lengths), and smart enough for product-Q&A.
+ * Model: deepseek/deepseek-chat — fast, cheap (~$0.01/conversation).
  *
- * No auth — chat is open to every visitor on the marketing site. We rate-
- * limit by IP via Vercel's edge automatically, plus a soft cap below.
+ * No auth — chat is open to every visitor on the marketing site.
  */
 import { NextRequest } from "next/server";
 import { createLLMClient, resolveModel } from "@/lib/llmClient";
@@ -17,54 +14,45 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
-const MODEL = "claude-haiku-4-5-20251001";
-const MAX_TURNS = 20;   // anti-abuse — drop conversation after 20 user turns
-const MAX_TOKENS = 400; // ~300 words per reply, plenty for support
+const MODEL = "deepseek/deepseek-chat";
+const MAX_TURNS = 20;
+const MAX_TOKENS = 400;
 
-type Message = { role: "user" | "assistant"; content: string };
+type Message = { role: "system" | "user" | "assistant"; content: string };
 
 export async function POST(req: NextRequest) {
-  let body: { messages?: Message[] };
-  try {
-    body = await req.json();
-  } catch {
-    return new Response("invalid json", { status: 400 });
+  let body: { messages?: { role: string; content: string }[] };
+  try { body = await req.json(); } catch { return new Response("invalid json", { status: 400 }); }
+
+  const rawMessages = (body.messages ?? [])
+    .filter((m): m is { role: string; content: string } => m && typeof m.content === "string");
+
+  if (rawMessages.length === 0) return new Response("messages required", { status: 400 });
+  if (rawMessages.filter((m) => m.role === "user").length > MAX_TURNS) {
+    return new Response("conversation limit reached", { status: 429 });
   }
 
-  const messages = (body.messages ?? []).filter(
-    (m): m is Message =>
-      m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string",
-  );
-
-  if (messages.length === 0) {
-    return new Response("messages required", { status: 400 });
-  }
-  if (messages.filter((m) => m.role === "user").length > MAX_TURNS) {
-    return new Response("conversation limit reached — refresh to start over", { status: 429 });
-  }
+  const messages: Message[] = [
+    { role: "system", content: CHAT_SYSTEM_PROMPT },
+    ...rawMessages.map((m) => ({ role: m.role as "user" | "assistant", content: m.content })),
+  ];
 
   const client = createLLMClient();
-  const stream = await client.messages.stream({
+  const stream = await client.chat.completions.create({
     model: resolveModel(MODEL),
     max_tokens: MAX_TOKENS,
-    system: [
-      { type: "text", text: CHAT_SYSTEM_PROMPT, cache_control: { type: "ephemeral" } },
-    ],
     messages,
+    stream: true,
   });
 
-  // Bridge Anthropic SDK stream → Web ReadableStream of SSE events
   const encoder = new TextEncoder();
   const readable = new ReadableStream({
     async start(controller) {
       try {
-        for await (const event of stream) {
-          if (
-            event.type === "content_block_delta" &&
-            event.delta.type === "text_delta"
-          ) {
-            const chunk = `data: ${JSON.stringify({ text: event.delta.text })}\n\n`;
-            controller.enqueue(encoder.encode(chunk));
+        for await (const chunk of stream) {
+          const delta = chunk.choices?.[0]?.delta?.content;
+          if (delta) {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify({ text: delta })}\n\n`));
           }
         }
         controller.enqueue(encoder.encode("data: [DONE]\n\n"));

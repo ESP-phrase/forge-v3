@@ -10,7 +10,7 @@ export type ClusterArticle = {
   keyword: string;
   intent: "informational" | "commercial" | "transactional" | "navigational";
   role: "pillar" | "cluster";
-  links_to: number[]; // indexes of other articles in this list
+  links_to: number[];
 };
 
 export type ClusterPlan = {
@@ -19,11 +19,6 @@ export type ClusterPlan = {
   articles: ClusterArticle[];
 };
 
-/**
- * Generate a topic cluster: 1 pillar article + 10-12 supporting cluster
- * articles, all linked together. Topic clusters rank 2-3x faster than
- * isolated articles because Google sees the topic coverage signal.
- */
 export async function generateClusterAction(formData: FormData): Promise<{
   ok: boolean;
   error?: string;
@@ -57,41 +52,37 @@ Rules:
 - No duplicate or near-duplicate keywords across articles.
 - Mix intents: 60% informational, 25% commercial, 15% transactional.
 
-Return your plan by calling the cluster_plan tool.`;
+Call the cluster_plan function with the result.`;
 
   const TOOL = {
-    name: "cluster_plan",
-    description: "Return the full cluster plan.",
-    input_schema: {
-      type: "object" as const,
-      properties: {
-        pillar_title: { type: "string", description: "Title of the pillar article" },
-        pillar_keyword: { type: "string", description: "Target keyword of the pillar" },
-        articles: {
-          type: "array",
-          minItems: 11,
-          maxItems: 13,
-          items: {
-            type: "object",
-            properties: {
-              title: { type: "string" },
-              keyword: { type: "string" },
-              intent: {
-                type: "string",
-                enum: ["informational", "commercial", "transactional", "navigational"],
+    type: "function" as const,
+    function: {
+      name: "cluster_plan",
+      description: "Return the full cluster plan.",
+      parameters: {
+        type: "object" as const,
+        properties: {
+          pillar_title: { type: "string", description: "Title of the pillar article" },
+          pillar_keyword: { type: "string", description: "Target keyword of the pillar" },
+          articles: {
+            type: "array",
+            minItems: 11,
+            maxItems: 13,
+            items: {
+              type: "object",
+              properties: {
+                title: { type: "string" },
+                keyword: { type: "string" },
+                intent: { type: "string", enum: ["informational", "commercial", "transactional", "navigational"] },
+                role: { type: "string", enum: ["pillar", "cluster"] },
+                links_to: { type: "array", items: { type: "integer" }, description: "Indexes of other articles to link to" },
               },
-              role: { type: "string", enum: ["pillar", "cluster"] },
-              links_to: {
-                type: "array",
-                items: { type: "integer" },
-                description: "Indexes of other articles in the list this one should link to",
-              },
+              required: ["title", "keyword", "intent", "role", "links_to"],
             },
-            required: ["title", "keyword", "intent", "role", "links_to"],
           },
         },
+        required: ["pillar_title", "pillar_keyword", "articles"],
       },
-      required: ["pillar_title", "pillar_keyword", "articles"],
     },
   };
 
@@ -104,56 +95,44 @@ Name: ${site.name}
 Niche: ${site.niche || "(not specified)"}
 Audience: ${site.audience || "(not specified)"}
 
-Return 1 pillar + 10-12 cluster articles. Call the cluster_plan tool.`;
+Return 1 pillar + 10-12 cluster articles. Call the cluster_plan function.`;
 
   const tag = `[cluster:${site.slug}]`;
   const t0 = Date.now();
   console.log(`${tag} ▶ planning cluster · pillar="${pillarTopic}"`);
 
   try {
-    const resp = await client.messages.create({
-      model: resolveModel("claude-sonnet-4-6"),
+    const resp = await client.chat.completions.create({
+      model: resolveModel("deepseek/deepseek-chat"),
       max_tokens: 3500,
-      system: SYSTEM,
+      messages: [
+        { role: "system", content: SYSTEM },
+        { role: "user", content: userMsg },
+      ],
       tools: [TOOL],
-      tool_choice: { type: "tool", name: "cluster_plan" },
-      messages: [{ role: "user", content: userMsg }],
+      tool_choice: { type: "function", function: { name: "cluster_plan" } },
     });
-    const tu = resp.content.find((b) => b.type === "tool_use");
-    if (!tu || tu.type !== "tool_use") {
-      console.warn(`${tag} ⚠ Claude returned no tool_use block`);
-      return { ok: false, error: "Claude returned no plan" };
+
+    const msg = resp.choices[0]?.message;
+    const tc = msg?.tool_calls?.[0];
+    if (!tc?.function?.arguments) {
+      console.warn(`${tag} ⚠ No tool call returned`);
+      return { ok: false, error: "AI returned no plan" };
     }
-    const plan = tu.input as ClusterPlan;
+    const plan = JSON.parse(tc.function.arguments) as ClusterPlan;
     const dur = ((Date.now() - t0) / 1000).toFixed(1);
-    const cost =
-      ((resp.usage?.input_tokens ?? 0) / 1_000_000) * 3 +
-      ((resp.usage?.output_tokens ?? 0) / 1_000_000) * 15;
-    console.log(
-      `${tag} ✓ plan ready · ${plan.articles.length} articles · ${dur}s · ~$${cost.toFixed(3)}`,
-    );
-    console.log(`${tag}   pillar: "${plan.pillar_title}"`);
-    plan.articles.forEach((a, i) => {
-      console.log(`${tag}   #${i + 1} [${a.intent}] ${a.title}`);
-    });
+    const u = resp.usage;
+    const cost = ((u?.prompt_tokens ?? 0) / 1_000_000) * 0.35 + ((u?.completion_tokens ?? 0) / 1_000_000) * 0.50;
+    console.log(`${tag} ✓ plan ready · ${plan.articles.length} articles · ${dur}s · ~$${cost.toFixed(3)}`);
     return { ok: true, plan };
   } catch (e) {
-    const msg = e instanceof Error ? e.message : "claude call failed";
+    const msg = e instanceof Error ? e.message : "call failed";
     console.error(`${tag} ✗ ${msg}`);
     return { ok: false, error: msg };
   }
 }
 
-/**
- * Persist a cluster plan as queued keywords on the site. Idempotent on the
- * (siteId, keyword) unique constraint — re-running skips dupes.
- */
-export async function saveClusterAction(formData: FormData): Promise<{
-  ok: boolean;
-  error?: string;
-  added?: number;
-  skipped?: number;
-}> {
+export async function saveClusterAction(formData: FormData): Promise<{ ok: boolean; error?: string; added?: number; skipped?: number }> {
   const session = await auth();
   if (!session?.user?.id) return { ok: false, error: "not signed in" };
 
@@ -162,35 +141,15 @@ export async function saveClusterAction(formData: FormData): Promise<{
   if (!siteId || !planJson) return { ok: false, error: "missing siteId or plan" };
 
   let plan: ClusterPlan;
-  try {
-    plan = JSON.parse(planJson) as ClusterPlan;
-  } catch {
-    return { ok: false, error: "invalid plan json" };
-  }
+  try { plan = JSON.parse(planJson) as ClusterPlan; } catch { return { ok: false, error: "invalid plan json" }; }
 
-  const tag = `[cluster-save:site=${siteId}]`;
-  console.log(`${tag} ▶ saving ${plan.articles.length} cluster keywords`);
-
-  let added = 0;
-  let skipped = 0;
+  let added = 0, skipped = 0;
   for (const a of plan.articles) {
     try {
-      await prisma.keyword.create({
-        data: {
-          siteId,
-          keyword: a.keyword,
-          intent: a.intent,
-          status: "queued",
-        },
-      });
+      await prisma.keyword.create({ data: { siteId, keyword: a.keyword, intent: a.intent, status: "queued" } });
       added += 1;
-      console.log(`${tag}   ✓ queued: ${a.keyword}`);
-    } catch {
-      skipped += 1; // unique constraint
-      console.log(`${tag}   ⊘ dup:    ${a.keyword}`);
-    }
+    } catch { skipped += 1; /* unique constraint */ }
   }
-  console.log(`${tag} ✓ done · added=${added} skipped=${skipped}`);
   revalidatePath(`/sites/${siteId}`);
   return { ok: true, added, skipped };
 }
