@@ -100,3 +100,22 @@ export async function sendLowCreditEmail(
     ),
   );
 }
+
+export async function sendMagicLinkEmail(to: string, token: string, next: string) {
+  const nextParam = next && next !== "/dashboard" ? `&next=${encodeURIComponent(next)}` : "";
+  const link = `${APP_URL}/auth/verify?token=${token}${nextParam}`;
+  await send(
+    to,
+    "Sign in to SEOForge",
+    shell(
+      `Your sign-in link`,
+      `
+      <p style="margin:0 0 14px;color:#ccc">Click the button below to sign in. This link expires in 15 minutes.</p>
+      <p style="margin:0 0 20px"><a href="${link}" style="background:#bef848;color:#000;padding:12px 24px;border-radius:10px;font-weight:800;text-decoration:none;display:inline-block">Sign in to SEOForge →</a></p>
+      <p style="margin:0 0 10px;color:#666;font-size:13px">Or copy this link:</p>
+      <p style="margin:0 0 16px;color:#666;font-size:12px;word-break:break-all">${link}</p>
+      <p style="margin:24px 0 0;color:#888;font-size:13px">If you didn't request this, ignore this email.</p>
+    `,
+    ),
+  );
+}

@@ -4,6 +4,7 @@ import {
   signInWithGitHubAction,
   signInWithPasswordAction,
   signUpAction,
+  sendMagicLinkAction,
 } from "@/actions/auth";
 import { isGitHubAuthConfigured } from "@/lib/auth";
 import { SubmitButton } from "./SubmitButton";
@@ -200,6 +201,28 @@ export default async function LoginPage({
               busyLabel={isSignup ? "Creating account…" : "Signing in…"}
             />
           </form>
+
+          {/* Magic link — passwordless sign-in alternative */}
+          {!isSignup ? (
+            <>
+              <div className="flex items-center gap-3 my-4">
+                <div className="flex-1 h-px bg-border" />
+                <span className="text-muted-2 text-[0.6rem] uppercase tracking-[0.18em] font-bold">or</span>
+                <div className="flex-1 h-px bg-border" />
+              </div>
+              <form action={sendMagicLinkAction} className="space-y-3">
+                {nextPath ? <input type="hidden" name="next" value={nextPath} /> : null}
+                <div className="relative">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" aria-hidden>
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                  <input name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="w-full pl-11 pr-3 py-3 bg-bg border border-border rounded-xl text-sm text-text focus:outline-none focus:border-accent-border placeholder:text-muted-2" />
+                </div>
+                <SubmitButton idleLabel="Send magic link" busyLabel="Sending link…" />
+              </form>
+            </>
+          ) : null}
 
           {/* Subtle swap link replaces the old tab toggle that confused users
               into thinking it was the submit button. */}
