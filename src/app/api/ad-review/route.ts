@@ -1,5 +1,5 @@
 /**
- * Ad creative review — send an image URL, get a structured quality report
+ * Ad creative review â€” send an image URL, get a structured quality report
  * from Gemini Flash via OpenRouter. Vision-capable, zero extra cost.
  *
  * POST body: { imageUrl: "https://..." }  or  { imageBase64: "..." }
@@ -12,26 +12,26 @@ export const dynamic = "force-dynamic";
 
 const MODEL = "google/gemini-2.5-flash";
 
-const SYSTEM = `You are an ad creative analyst. Review the image and return a JSON object. Evaluate it as a Google Ads image creative for a SaaS product called SEOForge — an AI SEO content automation tool ($1 trial, $29/mo).
+const SYSTEM = `You are an ad creative analyst. Review the image and return a JSON object. Evaluate it as a Google Ads image creative for a SaaS called SEOForge â€” an SEO content automation tool ($1 trial, $29/mo).
 
 Return this exact JSON structure:
 {
   "scores": {
-    "hook": number 0-100,       // Does the image grab attention in 1 second?
-    "cta_clarity": number 0-100, // Is the call-to-action obvious + compelling?
-    "visual_hierarchy": number 0-100, // Is the layout scannable? Text readable?
-    "brand_consistency": number 0-100, // Does it feel like a SaaS product?
-    "conversion_potential": number 0-100, // How likely to drive a click?
-    "overall": number 0-100      // Weighted average
+    "hook": number 0-100,
+    "cta_clarity": number 0-100,
+    "visual_hierarchy": number 0-100,
+    "brand_consistency": number 0-100,
+    "conversion_potential": number 0-100,
+    "overall": number 0-100
   },
-  "strengths": ["string"],       // 2-3 things the ad does well
-  "weaknesses": ["string"],      // 2-3 things hurting performance
-  "fixes": ["string"],           // 2-4 specific, actionable improvements
-  "best_for": "string",          // e.g. "Display Network", "YouTube", "Gmail", "Discovery"
-  "verdict": "string"            // 1-sentence overall assessment
+  "strengths": ["string"],
+  "weaknesses": ["string"],
+  "fixes": ["string"],
+  "best_for": "string",
+  "verdict": "string"
 }
 
-Be honest and specific. If the ad has no text, mention it. If the CTA is buried, say so. Rate against Google Ads best practices for conversion.`;
+Be honest and specific. Rate against Google Ads best practices for conversion.`;
 
 export async function POST(req: NextRequest) {
   let body: { imageUrl?: string; imageBase64?: string };

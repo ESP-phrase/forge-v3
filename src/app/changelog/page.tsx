@@ -134,7 +134,13 @@ export default function ChangelogPage() {
           })}
         </div>
 
-        <p className="text-muted-2 text-xs text-center mt-12">
+        <div className="mt-12 text-center">
+          <a href="/pricing" className="inline-block px-6 py-3 bg-accent text-black rounded-xl font-extrabold text-base no-underline hover:bg-accent/90 transition-colors shadow-glow">
+            Start for $1 →</a>
+          <p className="text-muted text-xs mt-2">3-day trial · cancel anytime</p>
+        </div>
+
+        <p className="text-muted-2 text-xs text-center mt-8">
           Want to suggest something? Open an issue on{" "}
           <a
             href="https://github.com/ESP-phrase/SEOForge"

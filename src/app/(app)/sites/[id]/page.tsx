@@ -147,6 +147,7 @@ export default async function SiteDetailPage({
           <form action={addKeywords}>
             <textarea
               name="keywords"
+              className="w-full h-24 px-3 py-2 bg-bg border border-border rounded-xl text-sm text-text focus:outline-none focus:border-accent-border placeholder:text-muted-2"
               placeholder="how to fix shopify checkout errors | informational&#10;best crm for real estate | commercial"
             />
             <div className="mt-3">

@@ -140,6 +140,12 @@ export default function RoadmapPage() {
           </a>
         </div>
 
+        <div className="mt-6 text-center">
+          <a href="/pricing" className="inline-block px-6 py-3 bg-accent text-black rounded-xl font-extrabold text-base no-underline hover:bg-accent/90 transition-colors shadow-glow">
+            Start for $1 →</a>
+          <p className="text-muted text-xs mt-2">3-day trial · cancel anytime</p>
+        </div>
+
         <p className="text-muted-2 text-xs text-center mt-8">
           See exact code changes on{" "}
           <Link href="/changelog" className="text-accent hover:underline">

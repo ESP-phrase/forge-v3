@@ -72,7 +72,7 @@ export default function DocsPage() {
           <p className="text-muted text-lg mt-3 max-w-2xl">
             Below is the short tour. The full reference lives in the README on{" "}
             <a
-              href="https://github.com/ESP-phrase/SEO"
+              href="https://github.com/ESP-phrase/SEOForge"
               className="text-accent"
               target="_blank"
               rel="noreferrer"
@@ -104,7 +104,7 @@ export default function DocsPage() {
         <div className="mt-12 text-center text-muted text-sm">
           Looking for something specific?{" "}
           <a
-            href="https://github.com/ESP-phrase/SEO/issues/new"
+            href="https://github.com/ESP-phrase/SEOForge/issues/new"
             className="text-accent"
             target="_blank"
             rel="noreferrer"

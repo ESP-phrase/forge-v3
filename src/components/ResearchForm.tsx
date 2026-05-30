@@ -72,6 +72,7 @@ export function ResearchForm({ siteId }: { siteId: number }) {
         <input
           type="text"
           required
+          className="w-full px-3 py-2.5 bg-bg border border-border rounded-xl text-sm text-text focus:outline-none focus:border-accent-border placeholder:text-muted-2"
           value={seed}
           onChange={(e) => setSeed(e.target.value)}
           placeholder="e.g. polymarket withdrawal"
@@ -84,6 +85,7 @@ export function ResearchForm({ siteId }: { siteId: number }) {
             </label>
             <input
               type="number"
+              className="w-full px-3 py-2.5 bg-bg border border-border rounded-xl text-sm text-text focus:outline-none focus:border-accent-border placeholder:text-muted-2"
               min={10}
               max={60}
               value={count}
@@ -115,6 +117,7 @@ export function ResearchForm({ siteId }: { siteId: number }) {
             Edit the textarea — uncheck or delete lines you don&apos;t want — then add to the queue.
           </p>
           <textarea
+            className="w-full h-32 px-3 py-2 bg-bg border border-border rounded-xl text-xs font-mono text-text focus:outline-none focus:border-accent-border"
             value={textareaValue}
             onChange={(e) => setTextareaValue(e.target.value)}
           />

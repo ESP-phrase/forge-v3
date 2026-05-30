@@ -260,7 +260,7 @@ export function SiteForm({
           name="expertVoice"
           defaultValue={site?.expertVoice}
           icon={<MessageIcon size={18} />}
-          placeholder="I've reviewed 500+ resumes as a hiring manager at three SaaS companies. I built ResumeGenius after seeing the same fixable mistakes over and over."
+          placeholder="I've reviewed hundreds of articles as a content editor at three SaaS companies. I built this site after seeing the same SEO mistakes over and over."
         />
 
         {/* Author bio HTML */}
@@ -272,7 +272,7 @@ export function SiteForm({
           defaultValue={site?.authorBioHtml}
           icon={<CodeIcon size={18} />}
           mono
-          placeholder='<p><strong>Written by Alex</strong> — founder of ResumeGenius. <a href="https://resumegenius.guru">Try it free</a>.</p>'
+          placeholder='<p><strong>Written by Alex</strong> — founder of this site. <a href="https://seoforge.org">Learn more</a>.</p>'
         />
 
         {/* Article theme colors */}
@@ -353,7 +353,7 @@ export function SiteForm({
                 defaultValue={site?.ctaHtml}
                 icon={<CodeIcon size={18} />}
                 mono
-                placeholder='<div class="cta-box"><p><strong>Stuck on your resume?</strong> ResumeGenius rewrites your bullets in minutes. <a href="https://resumegenius.guru">Try it free →</a></p></div>'
+                placeholder='<div class="cta-box"><p><strong>Want better content?</strong> We write SEO articles that rank. <a href="https://seoforge.org">Try it free →</a></p></div>'
               />
             </div>
 

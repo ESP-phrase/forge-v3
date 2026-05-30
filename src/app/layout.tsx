@@ -81,7 +81,6 @@ const ORG_SCHEMA = {
         { "@type": "Offer", name: "Operator", price: "79", priceCurrency: "USD", priceSpecification: { "@type": "UnitPriceSpecification", price: "79", priceCurrency: "USD", referenceQuantity: { "@type": "QuantitativeValue", value: "1", unitCode: "MON" } } },
         { "@type": "Offer", name: "Agency", price: "199", priceCurrency: "USD", priceSpecification: { "@type": "UnitPriceSpecification", price: "199", priceCurrency: "USD", referenceQuantity: { "@type": "QuantitativeValue", value: "1", unitCode: "MON" } } },
       ],
-      aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", ratingCount: "47" },
       description: DEFAULT_DESC,
     },
   ],

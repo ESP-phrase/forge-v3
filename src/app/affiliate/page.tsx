@@ -42,8 +42,8 @@ export default function AffiliatePage() {
         {/* Math grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-14">
           {[
-            { label: "Per Operator referral", value: "$8.70/mo", body: "30% of $29/mo for 12 months = $104.40 per customer" },
-            { label: "Per Agency referral", value: "$44.70/mo", body: "30% of $149/mo for 12 months = $536.40 per customer" },
+            { label: "Per Operator referral", value: "$23.70/mo", body: "30% of $79/mo for 12 months = $284.40 per customer" },
+            { label: "Per Agency referral", value: "$59.70/mo", body: "30% of $199/mo for 12 months = $716.40 per customer" },
             { label: "10 active referrals", value: "$1,044+/yr", body: "Realistic for a creator with a small SEO audience" },
           ].map((m) => (
             <div key={m.label} className="bg-card-grad border border-border rounded-2xl p-5 text-center">

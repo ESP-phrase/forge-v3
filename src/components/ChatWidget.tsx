@@ -31,7 +31,7 @@ type Msg = { role: "user" | "assistant"; content: string };
 const GREETING: Msg = {
   role: "assistant",
   content:
-    "Hi — I'm SEOForge's . Ask me anything about pricing, features, or whether this is right for your site.",
+    "Hi — I'm SEOForge's support assistant. Ask me anything about pricing, features, or whether this is right for your site.",
 };
 
 const STORAGE_KEY = "sf_chat_v1";
@@ -197,7 +197,7 @@ export function ChatWidget() {
               SF
             </div>
             <div className="min-w-0 flex-1">
-              <div className="font-bold text-sm text-text leading-tight">SEOForge </div>
+              <div className="font-bold text-sm text-text leading-tight">SEOForge</div>
               <div className="text-[0.65rem] text-muted leading-tight">Powered by Claude · usually replies in seconds</div>
             </div>
             <button
