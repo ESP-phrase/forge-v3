@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["@prisma/client", "@anthropic-ai/sdk"],
+  serverExternalPackages: ["@prisma/client"],
   async rewrites() {
     return [
       // First-party Clarity proxy. The Clarity script is served from our own
