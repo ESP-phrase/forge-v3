@@ -42,14 +42,13 @@ Write social posts that drive clicks WITHOUT looking like spam. Return JSON only
   "reddit_title": "<= 90 chars, question or specific claim, no clickbait",
   "reddit_body": "2-3 sentences of genuine context, then the URL on a new line"
 }`;
-  const resp = await client.messages.create({
+  const resp = await client.chat.completions.create({
     model: resolveModel(MODEL),
     max_tokens: 1000,
     messages: [{ role: "user", content: prompt }],
   });
-  const block = resp.content[0];
-  if (block.type !== "text") throw new Error("Non-text response from Claude.");
-  const stripped = block.text.replace(/^```(?:json)?\s*|\s*```$/g, "").trim();
+  const content = resp.choices[0]?.message?.content ?? "";
+  const stripped = content.replace(/^```(?:json)?\s*|\s*```$/g, "").trim();
   return JSON.parse(stripped) as Posts;
 }
 
