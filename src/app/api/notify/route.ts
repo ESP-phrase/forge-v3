@@ -1,6 +1,6 @@
 /**
- * Chat escalation notification — sends an email to the founder when a
- * visitor provides their email for human follow-up.
+ * Chat escalation notification â€” sends an email to the founder when
+ * a visitor provides their email for human follow-up.
  */
 import { NextRequest, NextResponse } from "next/server";
 
@@ -16,10 +16,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "email required" }, { status: 400 });
   }
 
-  // Log the escalation
   console.log(`[escalation] ${email} requested human contact`);
 
-  // Send notification to founder
   try {
     const { sendEscalationEmail } = await import("@/lib/email");
     void sendEscalationEmail(email, body.transcript, body.page);
