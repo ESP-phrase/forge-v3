@@ -7,7 +7,7 @@
  */
 import { createLLMClient, resolveModel } from "@/lib/llmClient";
 
-const MODEL = "gemini-2.5-flash";
+const MODEL = "deepseek/deepseek-chat";
 
 export type ArticleRecord = {
   id: number;

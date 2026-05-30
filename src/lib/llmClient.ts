@@ -1,18 +1,26 @@
 /**
- * Unified LLM client factory — Google Gemini via @google/generative-ai.
+ * Unified LLM client factory — OpenAI-compatible via OpenRouter.
  *
- * Uses GOOGLE_API_KEY from env. Call createLLMClient() to get a model
- * instance, then generateContent() for text or structured output.
- * Free tier: 1,500 requests/day on Gemini Flash — more than ample for
- * article generation traffic.
+ * One key (OPENROUTER_API_KEY) unlocks every model: DeepSeek, Claude, GPT,
+ * Gemini, Llama, Mistral, Qwen — switch by changing the model ID string.
+ * Default: deepseek/deepseek-chat ($0.35/$0.50 per M tokens).
  */
-import { GoogleGenerativeAI, type GenerativeModel } from "@google/generative-ai";
+import OpenAI from "openai";
 import { getEnv } from "@/lib/envFallback";
 
-export function createLLMClient(): GoogleGenerativeAI {
-  const key = getEnv("GOOGLE_API_KEY");
-  if (!key) throw new Error("GOOGLE_API_KEY env var is required.");
-  return new GoogleGenerativeAI(key);
+const OPENROUTER_BASE = "https://openrouter.ai/api/v1";
+
+export function createLLMClient(): OpenAI {
+  const key = getEnv("OPENROUTER_API_KEY");
+  if (!key) throw new Error("OPENROUTER_API_KEY env var is required.");
+  return new OpenAI({
+    baseURL: OPENROUTER_BASE,
+    apiKey: key,
+    defaultHeaders: {
+      "HTTP-Referer": getEnv("NEXT_PUBLIC_APP_URL") || "https://www.seoforge.org",
+      "X-Title": "SEOForge",
+    },
+  });
 }
 
 export function resolveModel(modelId: string): string {

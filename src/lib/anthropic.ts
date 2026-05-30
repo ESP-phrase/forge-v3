@@ -1,191 +1,120 @@
 /**
- * Article generation + keyword research with Google Gemini.
+ * Article generation + keyword research via OpenRouter (OpenAI-compatible API).
  *
- * Uses Gemini 2.5 Flash (free tier: 1,500 req/day). Structured JSON output
- * via response_mime_type ensures clean parsing every time.
+ * Default model: deepseek/deepseek-chat ($0.35/$0.50 per M tokens — ~$0.01/article).
+ * OpenRouter gives access to every model with one key. Switch models by changing
+ * the ARTICLE_MODEL / KEYWORD_MODEL constants below.
  */
 import { createLLMClient, resolveModel } from "@/lib/llmClient";
 
-const ARTICLE_MODEL = "gemini-2.5-flash";
-const KEYWORD_MODEL = "gemini-2.5-flash";
+const ARTICLE_MODEL = "deepseek/deepseek-chat";
+const ARTICLE_INPUT_PER_M = 0.35;
+const ARTICLE_OUTPUT_PER_M = 0.50;
 
-const SYSTEM_PROMPT = `You are a senior SEO content strategist who consistently ranks pages in position 1-3 on Google. Your articles don't just "cover the topic" — they WIN because you identify and fill gaps the current top results leave open, structure for featured snippets, and make the read so good people stay on the page.
+const KEYWORD_MODEL = "deepseek/deepseek-chat";
+const KEYWORD_INPUT_PER_M = 0.35;
+const KEYWORD_OUTPUT_PER_M = 0.50;
+
+const SYSTEM_PROMPT = `You are a senior SEO content strategist who consistently ranks pages in position 1-3 on Google. Your articles WIN because you fill gaps the current top results leave open, structure for featured snippets, and make the read so good people stay on the page.
 
 ## E-E-A-T signals (Google's quality rater guidelines)
 
 EVERY article must demonstrate these, not just state them:
+- **Experience**: Include a practical scenario or real-world tradeoff.
+- **Expertise**: Each H2 must contain at least one non-obvious insight.
+- **Authoritativeness**: Cite a known framework, tool, or methodology by name.
+- **Trustworthiness**: Acknowledge limitations. No overpromising.
 
-- **Experience**: Include a practical scenario, "I've seen this happen..." anecdote, or real-world tradeoff.
-  Not fabricated — frame as "A common pattern is..." or "Many operators find that..."
-- **Expertise**: Each H2 must contain at least one non-obvious insight. If the top 10 results all say X,
-  you must say "X, but here's the nuance they miss..." or "X works only when Y is true."
-- **Authoritativeness**: Cite a known framework, tool, or methodology by name when relevant.
-- **Trustworthiness**: Acknowledge limitations. "This approach isn't for everyone — if you have under
-  1,000 monthly visitors, prioritize X instead." No overpromising.
+## Content structure
 
-## Content structure (featured snippet targeting)
+1. First 40 words MUST be a featured-snippet-eligible answer. No preamble.
+2. After the opener, a TL;DR block. Then the body.
+3. FAQ section at the end with 5-7 questions phrased as real Google queries.
+4. Every H2 must be a scannable statement, not a label.
 
-1. **First 40 words MUST be a featured-snippet-eligible answer**. A direct, standalone sentence or two
-   that could appear as the Google answer box. No preamble. If the query is "how to X," the answer is
-   the definition + first step. If "what is X," the answer is the definition + why it matters.
-2. After the opener, the TL;DR block. Then the body.
-3. Body sections flow: context → problem → solution → evidence → counterpoint → next step.
-4. FAQ section at the end with 5-7 questions. Each Q must be an <h2> or <h3> that IS a real search
-   query (check the "People also ask" from SERP data if provided).
-5. **Every H2 must be a scannable statement, not a label.** Bad: "Features." Good: "The 3 features that
-   actually move the needle."
-
-## Readability (passes Flesch-Kincaid Grade 8-10)
+## Readability (Grade 8-10)
 
 - Paragraphs: 2-4 sentences max. Never a wall of text.
-- Sentences: Mix short (8-12 words) and medium (15-22 words). No run-ons over 30 words.
-- Use bulleted and numbered lists wherever a sequence or set exists.
-- Transition words between H2 sections so the article flows, not a disconnected list of facts.
-- Bold key conclusions within paragraphs so scanners catch them.
+- Mix short (8-12 words) and medium (15-22 words) sentences.
+- Use bulleted and numbered lists.
 
 ## Anti-AI patterns to AVOID
 
-These patterns immediately signal "AI-generated" and hurt rankings:
-
-- Do NOT use: "In today's fast-paced world...", "Whether you're a beginner or an expert..."
-- Do NOT use: "It is important to note that...", "In conclusion..."
-- Do NOT use: "Dive into", "Let's explore", "Unlock the power of", "Supercharge..."
-- Do NOT use the word "delve"
-- Do NOT end every section with a rhetorical question
-- Do NOT use "crucial" / "vital" / "essential" more than twice total
+Never use: "In today's fast-paced world...", "Whether you're a beginner or an expert...", "It is important to note that...", "In conclusion...", "Dive into", "Let's explore", "Unlock the power of", "Supercharge...", "delve", "crucial" / "vital" / "essential" more than twice total. Never end every section with a rhetorical question.
 
 ## Visual formatting rules (the page CSS depends on these exact patterns)
 
-### REQUIRED (every article must include ALL of these):
-- ONE <div class="tldr"> block right after the opening paragraph (mandatory)
-- TWO callout blocks (mix of tip / takeaway / warning — different types)
-- ONE <blockquote class="pull-quote"> near the top (first third of article)
-- ONE <blockquote class="pull-quote"> near the middle (creates visual rhythm)
+### REQUIRED in every article:
+- ONE <div class="tldr"> block right after the opening paragraph
+- TWO callout blocks (different types: tip / takeaway / warning)
+- ONE <blockquote class="pull-quote"> near the top (first third)
+- ONE <blockquote class="pull-quote"> near the middle
 - AT LEAST ONE of: comparison table OR stat row OR step list
 
-### Use these exact patterns:
+### Exact patterns:
 
-1. TL;DR block (mandatory, 2nd element after opening paragraph):
+1. TL;DR block:
    <div class="tldr">
      <div class="tldr-title">TL;DR</div>
      <ul>
-       <li>Point one — actionable, specific, 8-15 words</li>
-       <li>Point two</li>
-       <li>Point three</li>
-       <li>Point four</li>
+       <li>3-5 actionable bullets, 8-15 words each</li>
      </ul>
    </div>
 
-2. Callouts — match the tone to the content:
-   <aside class="callout callout-tip"><strong>Tip:</strong> Practical, immediately useful advice.</aside>
-   <aside class="callout callout-warning"><strong>Watch out:</strong> A mistake people make or a gotcha.</aside>
-   <aside class="callout callout-takeaway"><strong>Key takeaway:</strong> The single most important point from this section.</aside>
+2. Callouts:
+   <aside class="callout callout-tip"><strong>Tip:</strong> Practical advice.</aside>
+   <aside class="callout callout-warning"><strong>Watch out:</strong> A gotcha or mistake.</aside>
+   <aside class="callout callout-takeaway"><strong>Key takeaway:</strong> Single most important point.</aside>
 
-3. Pull quote (for opinionated or counter-intuitive insight):
-   <blockquote class="pull-quote">"A specific, sharp insight that makes the reader stop and think."</blockquote>
+3. Pull quote:
+   <blockquote class="pull-quote">"A sharp, counter-intuitive insight."</blockquote>
 
-4. Comparison table (when comparing approaches, tools, or strategies):
+4. Comparison table:
    <table class="comparison">
      <thead><tr><th>Approach</th><th>Best for</th><th>Limitation</th></tr></thead>
-     <tbody>
-       <tr><td>Option A</td><td>Specific use case</td><td>Honest drawback</td></tr>
-     </tbody>
+     <tbody><tr><td>Option A</td><td>Use case</td><td>Honest drawback</td></tr></tbody>
    </table>
 
-5. Stat row (use for showing scale, impact, or benchmarks — minimum 2 boxes, maximum 4):
+5. Stat row (2-4 boxes):
    <div class="stat-row">
-     <div class="stat-box"><div class="stat-number">42%</div><div class="stat-label">metric name</div></div>
-     <div class="stat-box"><div class="stat-number">3.2x</div><div class="stat-label">metric name</div></div>
+     <div class="stat-box"><div class="stat-number">42%</div><div class="stat-label">metric</div></div>
    </div>
 
-6. Numbered step block (for how-to sequences, processes, workflows):
+6. Step list:
    <div class="steps">
-     <div class="step"><div class="step-n">1</div><div class="step-body"><strong>Action verb.</strong> Why it matters. How to do it.</div></div>
+     <div class="step"><div class="step-n">1</div><div class="step-body"><strong>Action.</strong> Why + how.</div></div>
    </div>
 
-7. Use <mark> LIBERALLY to highlight key phrases (10-20 times). Highlight numbers, key concepts, counter-intuitive points. Do NOT highlight filler words.
-
-8. Use <code> for: tool names, technical terms, API endpoints, JSON keys, CLI commands.
-
-9. Inline key-stat (use 3-5 times for important metrics within sentences):
-   <p>Teams that ship daily see <span class="key-stat">40% faster feedback cycles</span> compared to weekly release cadences.</p>
+7. Use <mark> 10-20 times to highlight key phrases.
+8. Use <code> for technical terms.
+9. Use <span class="key-stat"> 3-5 times for important numbers.
 
 ## SEO specifics
 
-- Primary keyword MUST appear in: title, first 100 words, one H2, meta description, and at least one <mark> tag.
-- Secondary/related keywords should appear naturally in H3s and body text — never forced.
-- Internal link anchor text: use a natural anchor phrase that describes the topic.
-- URL slug: use 3-5 words from the title, no stop words, kebab-case.
+- Primary keyword MUST appear in: title, first 100 words, one H2, meta description, at least one <mark>.
+- URL slug: 3-5 words from title, no stop words, kebab-case.
 
-## FAQ section quality rules
+## FAQ section quality
 
-- Each question must read like something a real person types into Google.
-- Questions must be answered in 2-4 sentences with a concrete answer.
-- Mix question types: "How to..." / "What is..." / "Why does..." / "When should..." / "Can you..."
-- Place FAQ at the end of the article after all body content and the CTA.
+- Each Q phrased like a real search query.
+- 2-4 sentence answers with concrete specifics.
+- Mix types: "How to...", "What is...", "Why does...", "When should..."
+- Place FAQ at the very end.
 
-## Output
+Call the publish_article function with the complete article. Do not output prose outside the function call.`;
 
-Return a single JSON object with this exact structure. The html field contains the full article body.
-Do NOT wrap in code fences — output raw JSON.`;
-
-const KEYWORD_SYSTEM = `You are an SEO keyword researcher. You generate long-tail keyword
-candidates that a NEW domain (low authority, no backlinks) can realistically rank for
-within 3-6 months.
+const KEYWORD_SYSTEM = `You are an SEO keyword researcher. Generate long-tail keyword candidates that a NEW domain can realistically rank for within 3-6 months.
 
 Hard rules:
-- Always 4+ words. Pure short-tail like "polymarket" is rejected.
-- Concrete and specific — geographic modifiers ("in canada"), year ("in 2026"), problem
-  framings ("how to fix", "why is", "is X legal"), comparison framings ("X vs Y"), and
-  buying-stage framings ("best X for Y") all qualify.
+- Always 4+ words. Pure short-tail rejected.
+- Geographic modifiers ("in canada"), year ("in 2026"), problem framings ("how to fix"), comparison framings ("X vs Y"), buying-stage framings ("best X for Y").
 - Honest commercial vs informational tagging.
 - No invented brands, products, or stats.
 
-Output a single JSON object, no prose, no fences:
-{
-  "keywords": [
-    {"keyword": "...", "intent": "informational"},
-    {"keyword": "...", "intent": "commercial"}
-  ]
-}`;
+Return a single JSON object with the get_keywords function.`;
 
-/**
- * Inline CSS prepended to every generated article. WordPress preserves <style>
- * in post content, so this works regardless of the active theme.
- */
 const ARTICLE_STYLES = `<style>
-/* === Theme variables — per-site colors override these via inline <style> === */
-.sf-article{
-  --sf-accent:#0ea5e9;
-  --sf-accent-dark:#0284c7;
-  --sf-accent-darker:#0369a1;
-  --sf-accent-2:#f59e0b;
-  --sf-accent-2-dark:#b45309;
-  --sf-accent-2-darkest:#451a03;
-  --sf-accent-2-tint:#fffbeb;
-  --sf-accent-2-tint-2:#fef3c7;
-  --sf-accent-2-border:#fcd34d;
-  --sf-accent-3:#22c55e;
-  --sf-accent-3-dark:#15803d;
-  --sf-accent-3-darkest:#14532d;
-  --sf-accent-3-tint:#f0fdf4;
-  --sf-accent-4:#a855f7;
-  --sf-warning:#ef4444;
-  --sf-warning-dark:#b91c1c;
-  --sf-warning-darkest:#7f1d1d;
-  --sf-warning-tint:#fef2f2;
-  --sf-info:#3b82f6;
-  --sf-info-dark:#1d4ed8;
-  --sf-info-darkest:#1e3a8a;
-  --sf-info-tint:#eff6ff;
-  --sf-ink:#0f172a;
-  --sf-text:#1f2937;
-  --sf-muted:#64748b;
-  --sf-muted-2:#94a3b8;
-  --sf-border:#e2e8f0;
-  --sf-surface:#f8fafc;
-  --sf-surface-2:#f1f5f9;
-}
+.sf-article{--sf-accent:#0ea5e9;--sf-accent-dark:#0284c7;--sf-accent-darker:#0369a1;--sf-accent-2:#f59e0b;--sf-accent-2-dark:#b45309;--sf-accent-2-darkest:#451a03;--sf-accent-2-tint:#fffbeb;--sf-accent-2-tint-2:#fef3c7;--sf-accent-2-border:#fcd34d;--sf-accent-3:#22c55e;--sf-accent-3-dark:#15803d;--sf-accent-3-darkest:#14532d;--sf-accent-3-tint:#f0fdf4;--sf-accent-4:#a855f7;--sf-warning:#ef4444;--sf-warning-dark:#b91c1c;--sf-warning-darkest:#7f1d1d;--sf-warning-tint:#fef2f2;--sf-info:#3b82f6;--sf-info-dark:#1d4ed8;--sf-info-darkest:#1e3a8a;--sf-info-tint:#eff6ff;--sf-ink:#0f172a;--sf-text:#1f2937;--sf-muted:#64748b;--sf-muted-2:#94a3b8;--sf-border:#e2e8f0;--sf-surface:#f8fafc;--sf-surface-2:#f1f5f9}
 .sf-article{font-size:1.1rem;line-height:1.75;color:var(--sf-text);max-width:780px;margin:0 auto;font-family:-apple-system,system-ui,"Segoe UI",Inter,sans-serif}
 .sf-article > p:first-of-type::first-letter{font-size:3.4rem;font-weight:800;float:left;line-height:0.95;padding:0.5rem 0.75rem 0 0;color:var(--sf-accent);font-family:Georgia,serif}
 .sf-article p{margin:1rem 0}
@@ -220,11 +149,11 @@ const ARTICLE_STYLES = `<style>
 .sf-article .hero-banner .eyebrow{position:relative;font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.15em;opacity:0.85;margin-bottom:0.4rem}
 .sf-article .hero-banner .lead{position:relative;font-size:1.15rem;line-height:1.4;font-weight:500;max-width:38rem;margin:0 auto}
 .sf-article .tldr{background:linear-gradient(135deg,var(--sf-accent-2-tint) 0%,var(--sf-accent-2-tint-2) 100%);border:1px solid var(--sf-accent-2-border);border-radius:14px;padding:1.5rem 1.75rem;margin:2rem 0;box-shadow:0 1px 3px rgba(0,0,0,0.05);position:relative}
-.sf-article .tldr::before{content:"⚡";position:absolute;top:-14px;left:1.5rem;background:var(--sf-accent-2);color:#fff;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:1.1rem;box-shadow:0 2px 6px color-mix(in srgb,var(--sf-accent-2) 40%,transparent)}
+.sf-article .tldr::before{content:"\26A1";position:absolute;top:-14px;left:1.5rem;background:var(--sf-accent-2);color:#fff;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:1.1rem;box-shadow:0 2px 6px color-mix(in srgb,var(--sf-accent-2) 40%,transparent)}
 .sf-article .tldr-title{font-weight:800;text-transform:uppercase;font-size:0.78rem;letter-spacing:0.1em;color:var(--sf-accent-2-dark);margin:0.25rem 0 0.65rem;padding-left:2.5rem}
 .sf-article .tldr ul{margin:0;padding-left:1.25rem;list-style:none}
 .sf-article .tldr li{margin:0.45rem 0;padding-left:1.5rem;position:relative;color:var(--sf-accent-2-darkest)}
-.sf-article .tldr li::before{content:"→";position:absolute;left:0;color:var(--sf-accent-2);font-weight:700}
+.sf-article .tldr li::before{content:"\2192";position:absolute;left:0;color:var(--sf-accent-2);font-weight:700}
 .sf-article .callout{position:relative;padding:1.1rem 1.4rem 1.1rem 3.25rem;border-radius:12px;margin:1.75rem 0;font-size:1rem;line-height:1.6;border-left:4px solid;box-shadow:0 1px 2px rgba(0,0,0,0.04)}
 .sf-article .callout::before{position:absolute;left:1rem;top:1rem;width:1.4rem;height:1.4rem;border-radius:50%;display:grid;place-items:center;font-size:0.9rem;font-weight:800;color:#fff}
 .sf-article .callout strong{display:inline-block;margin-right:0.35rem}
@@ -233,7 +162,7 @@ const ARTICLE_STYLES = `<style>
 .sf-article .callout-warning{background:var(--sf-warning-tint);border-color:var(--sf-warning);color:var(--sf-warning-darkest)}
 .sf-article .callout-warning::before{content:"!";background:var(--sf-warning)}
 .sf-article .callout-takeaway{background:var(--sf-accent-3-tint);border-color:var(--sf-accent-3);color:var(--sf-accent-3-darkest)}
-.sf-article .callout-takeaway::before{content:"★";background:var(--sf-accent-3);font-size:0.75rem}
+.sf-article .callout-takeaway::before{content:"\2605";background:var(--sf-accent-3);font-size:0.75rem}
 .sf-article .pull-quote{font-size:1.65rem;font-style:italic;line-height:1.45;border:0;padding:1.75rem 2rem 1.75rem 4rem;margin:2.5rem 0;color:var(--sf-ink);background:linear-gradient(180deg,var(--sf-surface),#fff);border-radius:16px;position:relative;font-family:Georgia,"Times New Roman",serif;font-weight:500;box-shadow:0 1px 3px rgba(0,0,0,0.04);border-left:4px solid var(--sf-accent-4)}
 .sf-article .pull-quote::before{content:"\\201C";position:absolute;top:0.5rem;left:1rem;font-size:5rem;color:var(--sf-accent-4);font-family:Georgia,serif;line-height:1;opacity:0.5}
 .sf-article table.comparison{width:100%;border-collapse:collapse;margin:2rem 0;font-size:0.97rem;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px var(--sf-border),0 4px 12px rgba(0,0,0,0.04)}
@@ -269,20 +198,17 @@ const ARTICLE_STYLES = `<style>
 </style>`;
 
 function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 80);
+  return text.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
 }
 
 function stripJsonFence(text: string): string {
   let t = text.trim();
-  if (t.startsWith("```")) {
-    t = t.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
-  }
+  if (t.startsWith("```")) t = t.replace(/^```(?:json)?\s*/, "").replace(/\s*```$/, "");
   return t;
+}
+
+function cost(input: number, output: number, inPerM: number, outPerM: number): number {
+  return (input / 1_000_000) * inPerM + (output / 1_000_000) * outPerM;
 }
 
 export type GeneratedArticle = {
@@ -315,10 +241,7 @@ export type SiteContext = {
 };
 
 function buildThemeOverride(site: SiteContext): string {
-  const a1 = site.themeAccent ?? "";
-  const a2 = site.themeAccent2 ?? "";
-  const a3 = site.themeAccent3 ?? "";
-  const a4 = site.themeAccent4 ?? "";
+  const a1 = site.themeAccent ?? "", a2 = site.themeAccent2 ?? "", a3 = site.themeAccent3 ?? "", a4 = site.themeAccent4 ?? "";
   if (!a1 && !a2 && !a3 && !a4) return "";
   const lines: string[] = [];
   if (a1) lines.push(`--sf-accent:${a1};--sf-accent-dark:${a1};--sf-accent-darker:${a1}`);
@@ -328,148 +251,107 @@ function buildThemeOverride(site: SiteContext): string {
   return `<style>.sf-article{${lines.join(";")}}</style>`;
 }
 
-function extractAuthorName(authorBioHtml: string | null | undefined, siteName: string): string {
-  if (!authorBioHtml) return `${siteName} Team`;
-  const m = authorBioHtml.match(/<strong[^>]*>(?:Written by\s+)?([^<]+)<\/strong>/i);
-  if (m) return m[1].replace(/Written by\s+/i, "").trim();
-  return `${siteName} Team`;
+function extractAuthorName(b: string | null | undefined, site: string): string {
+  if (!b) return `${site} Team`;
+  const m = b.match(/<strong[^>]*>(?:Written by\s+)?([^<]+)<\/strong>/i);
+  return m ? m[1].replace(/Written by\s+/i, "").trim() : `${site} Team`;
 }
 
-function extractAuthorUrl(authorBioHtml: string | null | undefined): string | null {
-  if (!authorBioHtml) return null;
-  const m = authorBioHtml.match(/<a[^>]+href=["']([^"']+)["']/i);
+function extractAuthorUrl(b: string | null | undefined): string | null {
+  if (!b) return null;
+  const m = b.match(/<a[^>]+href=["']([^"']+)["']/i);
   return m ? m[1] : null;
 }
 
-function articleJsonLd(opts: {
-  title: string;
-  meta: string;
-  siteName: string;
-  authorBioHtml?: string | null;
-  url?: string | null;
-  publishedAt?: Date;
-}): string {
-  const authorName = extractAuthorName(opts.authorBioHtml, opts.siteName);
-  const authorUrl = extractAuthorUrl(opts.authorBioHtml);
-  const now = (opts.publishedAt ?? new Date()).toISOString();
-  const author: Record<string, unknown> = { "@type": "Person", name: authorName };
-  if (authorUrl) author.url = authorUrl;
+function articleJsonLd(o: { title: string; meta: string; siteName: string; authorBioHtml?: string | null; url?: string | null; publishedAt?: Date }): string {
+  const an = extractAuthorName(o.authorBioHtml, o.siteName);
+  const au = extractAuthorUrl(o.authorBioHtml);
+  const now = (o.publishedAt ?? new Date()).toISOString();
+  const author: Record<string, unknown> = { "@type": "Person", name: an };
+  if (au) author.url = au;
   const payload: Record<string, unknown> = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: opts.title,
-    description: opts.meta,
-    author,
-    publisher: { "@type": "Organization", name: opts.siteName },
-    datePublished: now,
-    dateModified: now,
+    "@context": "https://schema.org", "@type": "Article",
+    headline: o.title, description: o.meta, author,
+    publisher: { "@type": "Organization", name: o.siteName },
+    datePublished: now, dateModified: now,
   };
-  if (opts.url) {
-    payload.mainEntityOfPage = { "@type": "WebPage", "@id": opts.url };
-    payload.url = opts.url;
-  }
+  if (o.url) { payload.mainEntityOfPage = { "@type": "WebPage", "@id": o.url }; payload.url = o.url; }
   return `<script type="application/ld+json">${JSON.stringify(payload)}</script>`;
 }
 
 function faqJsonLd(faq: { q: string; a: string }[]): string {
   if (!faq?.length) return "";
-  const items = faq
-    .filter((f) => f.q && f.a)
-    .map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    }));
+  const items = faq.filter((f) => f.q && f.a).map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } }));
   if (!items.length) return "";
-  const payload = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items,
-  };
-  return `<script type="application/ld+json">${JSON.stringify(payload)}</script>`;
+  return `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: items })}</script>`;
 }
 
-export async function generateArticle(
-  keyword: string,
-  intent: string,
-  site: SiteContext,
-  serpContext?: string | null,
-): Promise<GeneratedArticle> {
-  const parts: string[] = [
-    `Keyword: ${keyword}`,
-    `Search intent: ${intent}`,
-  ];
+const ARTICLE_TOOL = {
+  type: "function" as const,
+  function: {
+    name: "publish_article",
+    description: "Publish the generated SEO article with complete metadata.",
+    parameters: {
+      type: "object" as const,
+      properties: {
+        title: { type: "string", description: "Title tag, 50-65 chars, primary keyword near the front." },
+        slug: { type: "string", description: "URL slug, 3-5 words, kebab-case, no stop words." },
+        meta_description: { type: "string", description: "Meta description, 140-160 chars. Include keyword + soft CTA." },
+        html: { type: "string", description: "Full article body as valid HTML (no <html>/<body>). Include TL;DR, callouts, pull-quotes, visual elements, <mark> tags, <span class='key-stat'>, H2/H3 structure, FAQ at end." },
+        category: { type: "string", description: "Single broad topic phrase, kebab-case." },
+        tags: { type: "array", items: { type: "string" }, description: "4-7 specific topic tags, kebab-case." },
+        faq: { type: "array", items: { type: "object", properties: { q: { type: "string" }, a: { type: "string" } }, required: ["q", "a"] }, description: "5-7 FAQ entries with concrete answers." },
+        key_takeaway: { type: "string", description: "One sentence (max 160 chars) capturing the single most important insight." },
+      },
+      required: ["title", "slug", "meta_description", "html", "category", "tags", "faq", "key_takeaway"],
+    },
+  },
+};
+
+export async function generateArticle(keyword: string, intent: string, site: SiteContext, serpContext?: string | null): Promise<GeneratedArticle> {
+  const parts: string[] = [`Keyword: ${keyword}`, `Search intent: ${intent}`];
   if (site.niche) parts.push(`Site niche: ${site.niche}`);
   if (site.audience) parts.push(`Target audience: ${site.audience}`);
-  if (site.expertVoice) parts.push(`Expert voice / perspective:\n${site.expertVoice}`);
+  if (site.expertVoice) parts.push(`Expert voice:\n${site.expertVoice}`);
   if (serpContext) parts.push(`\n${serpContext}`);
-  parts.push("\nReturn a JSON object with: title, slug, meta_description, html, category, tags, faq, key_takeaway.");
 
-  const genAI = createLLMClient();
-  const model = genAI.getGenerativeModel({
+  const client = createLLMClient();
+  const resp = await client.chat.completions.create({
     model: resolveModel(ARTICLE_MODEL),
-    generationConfig: {
-      responseMimeType: "application/json",
-      temperature: 0.7,
-      maxOutputTokens: 8192,
-    },
-    systemInstruction: SYSTEM_PROMPT,
+    max_tokens: 8000,
+    temperature: 0.7,
+    messages: [{ role: "system", content: SYSTEM_PROMPT }, { role: "user", content: parts.join("\n") }],
+    tools: [ARTICLE_TOOL],
+    tool_choice: { type: "function", function: { name: "publish_article" } },
   });
 
-  const result = await model.generateContent(parts.join("\n"));
-  const text = result.response.text();
+  const msg = resp.choices[0]?.message;
+  const tc = msg?.tool_calls?.[0];
+  let data: Record<string, unknown> = {};
 
-  let data: Record<string, unknown>;
-  try {
-    data = JSON.parse(stripJsonFence(text)) as Record<string, unknown>;
-  } catch {
-    throw new Error(`Gemini returned unparseable JSON: ${text.slice(0, 200)}`);
+  if (tc?.function?.arguments) {
+    try { data = JSON.parse(tc.function.arguments) as Record<string, unknown>; } catch { /* fall through */ }
+  }
+  if (!data.title && !data.html && msg?.content) {
+    try { data = JSON.parse(stripJsonFence(msg.content)) as Record<string, unknown>; } catch { throw new Error(`No tool call and unparseable content: ${msg.content.slice(0, 200)}`); }
   }
 
-  return finalizeArticle(data, site);
+  return finalizeArticle(data, site, resp);
 }
 
-function finalizeArticle(
-  data: Record<string, unknown>,
-  site: SiteContext,
-): GeneratedArticle {
+function finalizeArticle(data: Record<string, unknown>, site: SiteContext, resp: { usage?: { prompt_tokens?: number; completion_tokens?: number } | null }): GeneratedArticle {
   const title = String(data.title ?? "");
   if (!title) throw new Error("Article missing title.");
   const htmlBody = String(data.html ?? "");
   if (!htmlBody) throw new Error("Article missing html.");
+  const slug = (typeof data.slug === "string" && data.slug.length > 0) ? data.slug : slugify(title);
+  const tags = Array.isArray(data.tags) ? data.tags.map((t) => String(t)) : [];
+  const faq = Array.isArray(data.faq) ? data.faq.filter((f) => typeof f === "object" && f !== null).map((f) => ({ q: String((f as Record<string, unknown>).q ?? ""), a: String((f as Record<string, unknown>).a ?? "") })) : [];
 
-  const slug = (typeof data.slug === "string" && data.slug.length > 0)
-    ? data.slug
-    : slugify(title);
-  const tags = Array.isArray(data.tags)
-    ? data.tags.map((t) => String(t))
-    : [];
-  const faq = Array.isArray(data.faq)
-    ? data.faq.filter((f) => typeof f === "object" && f !== null).map((f) => ({
-        q: String((f as Record<string, unknown>).q ?? ""),
-        a: String((f as Record<string, unknown>).a ?? ""),
-      }))
-    : [];
+  const schema = articleJsonLd({ title, meta: String(data.meta_description ?? ""), siteName: site.name, authorBioHtml: site.authorBioHtml }) + faqJsonLd(faq);
+  const bio = site.authorBioHtml?.trim(), cta = site.ctaHtml?.trim(), hero = site.heroImageHtml?.trim();
 
-  const schema =
-    articleJsonLd({
-      title,
-      meta: String(data.meta_description ?? ""),
-      siteName: site.name,
-      authorBioHtml: site.authorBioHtml,
-    }) +
-    faqJsonLd(faq);
-  const bio = site.authorBioHtml?.trim();
-  const cta = site.ctaHtml?.trim();
-  const hero = site.heroImageHtml?.trim();
-
-  let body = "";
-  if (hero) {
-    body += `${hero}\n`;
-  } else {
-    const meta = String(data.meta_description ?? "").replace(/"/g, "&quot;");
-    body += `<div class="hero-banner"><div class="eyebrow">${(site.niche || "Article").toUpperCase()}</div><div class="lead">${meta}</div></div>\n`;
-  }
+  let body = hero ? `${hero}\n` : `<div class="hero-banner"><div class="eyebrow">${(site.niche || "Article").toUpperCase()}</div><div class="lead">${String(data.meta_description ?? "").replace(/"/g, "&quot;")}</div></div>\n`;
   body += htmlBody;
   if (cta) body += `\n<hr/>\n<aside class="cta">${cta}</aside>`;
   if (bio) body += `\n<hr/>\n<div class="author-bio">${bio}</div>`;
@@ -477,68 +359,35 @@ function finalizeArticle(
   const themeOverride = buildThemeOverride(site);
   const html = `${ARTICLE_STYLES}\n${themeOverride}\n<div class="sf-article">\n${body}\n</div>\n${schema}`;
 
-  const plain = html
-    .replace(/<script[\s\S]*?<\/script>/g, "")
-    .replace(/<[^>]+>/g, " ");
-  const wordCount = plain.split(/\s+/).filter(Boolean).length;
+  const plain = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
+  const wc = plain.split(/\s+/).filter(Boolean).length;
+  const u = resp.usage;
+  const inTok = u?.prompt_tokens ?? 0, outTok = u?.completion_tokens ?? 0;
 
-  return {
-    title,
-    slug,
-    meta_description: String(data.meta_description ?? ""),
-    html,
-    category: String(data.category ?? ""),
-    tags,
-    faq,
-    key_takeaway: String(data.key_takeaway ?? ""),
-    word_count: wordCount,
-    input_tokens: 0,
-    output_tokens: 0,
-    cost_usd: 0,
-  };
+  return { title, slug, meta_description: String(data.meta_description ?? ""), html, category: String(data.category ?? ""), tags, faq, key_takeaway: String(data.key_takeaway ?? ""), word_count: wc, input_tokens: inTok, output_tokens: outTok, cost_usd: cost(inTok, outTok, ARTICLE_INPUT_PER_M, ARTICLE_OUTPUT_PER_M) };
 }
 
 export type Suggestion = { keyword: string; intent: string };
 
-export async function suggestKeywords(
-  seed: string,
-  site: SiteContext,
-  count = 30,
-): Promise<{ keywords: Suggestion[]; cost_usd: number; input_tokens: number; output_tokens: number }> {
-  const parts: string[] = [
-    `Seed term or topic: ${seed}`,
-    `Generate ${count} long-tail keyword candidates.`,
-  ];
+export async function suggestKeywords(seed: string, site: SiteContext, count = 30): Promise<{ keywords: Suggestion[]; cost_usd: number; input_tokens: number; output_tokens: number }> {
+  const parts = [`Seed term: ${seed}`, `Generate ${count} long-tail keyword candidates.`];
   if (site.niche) parts.push(`Site niche: ${site.niche}`);
   if (site.audience) parts.push(`Target audience: ${site.audience}`);
-  parts.push("Return only the JSON object.");
 
-  const genAI = createLLMClient();
-  const model = genAI.getGenerativeModel({
+  const client = createLLMClient();
+  const resp = await client.chat.completions.create({
     model: resolveModel(KEYWORD_MODEL),
-    generationConfig: {
-      responseMimeType: "application/json",
-      temperature: 0.7,
-      maxOutputTokens: 2500,
-    },
-    systemInstruction: KEYWORD_SYSTEM,
+    max_tokens: 2500,
+    temperature: 0.7,
+    messages: [{ role: "system", content: KEYWORD_SYSTEM }, { role: "user", content: parts.join("\n") }],
+    response_format: { type: "json_object" },
   });
 
-  const result = await model.generateContent(parts.join("\n"));
-  const text = result.response.text();
+  const text = resp.choices[0]?.message?.content ?? "";
   const data = JSON.parse(stripJsonFence(text)) as { keywords?: Suggestion[] };
+  const items = (data.keywords ?? []).map((k) => ({ keyword: (k.keyword ?? "").trim(), intent: (k.intent ?? "informational").toLowerCase() })).filter((k) => k.keyword.length > 0 && k.keyword.split(/\s+/).length >= 3);
 
-  const items = (data.keywords ?? [])
-    .map((k) => ({
-      keyword: (k.keyword ?? "").trim(),
-      intent: (k.intent ?? "informational").toLowerCase(),
-    }))
-    .filter((k) => k.keyword.length > 0 && k.keyword.split(/\s+/).length >= 3);
-
-  return {
-    keywords: items,
-    input_tokens: 0,
-    output_tokens: 0,
-    cost_usd: 0,
-  };
+  const u = resp.usage;
+  const inTok = u?.prompt_tokens ?? 0, outTok = u?.completion_tokens ?? 0;
+  return { keywords: items, input_tokens: inTok, output_tokens: outTok, cost_usd: cost(inTok, outTok, KEYWORD_INPUT_PER_M, KEYWORD_OUTPUT_PER_M) };
 }
