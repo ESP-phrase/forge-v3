@@ -119,3 +119,20 @@ export async function sendMagicLinkEmail(to: string, token: string, next: string
     ),
   );
 }
+
+export async function sendEscalationEmail(visitorEmail: string, transcript?: string, page?: string) {
+  const display = visitorEmail.split("@")[0];
+  await send(
+    process.env.EMAIL_FROM || "onboarding@resend.dev",
+    `Chat: ${display} wants to talk`,
+    shell(
+      `${display} wants to talk`,
+      `
+      <p style="margin:0 0 10px;color:#ccc"><strong>Email:</strong> <a href="mailto:${visitorEmail}" style="color:#bef848">${visitorEmail}</a></p>
+      <p style="margin:0 0 10px;color:#ccc"><strong>Page:</strong> ${page || "unknown"}</p>
+      ${transcript ? `<p style="margin:0 0 16px;color:#888;font-size:13px;background:#1a1a1a;padding:12px;border-radius:8px;white-space:pre-wrap;max-width:100%%;overflow-x:auto">${transcript.slice(0, 1500)}</p>` : ""}
+      <p style="margin:0 0 16px"><a href="mailto:${visitorEmail}" style="background:#bef848;color:#000;padding:10px 18px;border-radius:10px;font-weight:800;text-decoration:none;display:inline-block">Reply now →</a></p>
+    `,
+    ),
+  );
+}

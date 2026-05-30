@@ -1,21 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
 
 // Routes where we DON'T show the widget — the in-app dashboard pages.
-// Authed users in the app shouldn't see a marketing-style chat bubble.
 const HIDE_ON_PREFIXES = [
-  "/dashboard",
-  "/sites",
-  "/billing",
-  "/queue",
-  "/referrals",
-  "/settings",
-  "/cron",
-  "/login",
-  "/signup",
-  "/test-pixels",
+  "/dashboard", "/sites", "/billing", "/queue", "/referrals",
+  "/settings", "/cron", "/login", "/signup", "/test-pixels",
 ];
 
 /**
@@ -75,6 +66,28 @@ export function ChatWidget() {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages, open, streaming]);
+
+  // Notify founder when visitor shares their email
+  const notifiedRef = useRef(false);
+  useEffect(() => {
+    if (notifiedRef.current) return;
+    const lastUser = [...messages].reverse().find((m) => m.role === "user");
+    if (!lastUser) return;
+    const m = lastUser.content.match(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/);
+    if (m) {
+      notifiedRef.current = true;
+      const email = m[1].toLowerCase();
+      fetch("/api/notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          transcript: messages.slice(-8).map((x) => `${x.role}: ${x.content}`).join("\n"),
+          page: pathname ?? "/",
+        }),
+      }).catch(() => {});
+    }
+  }, [messages, pathname]);
 
   // Focus input when panel opens.
   useEffect(() => {
@@ -198,7 +211,7 @@ export function ChatWidget() {
             </div>
             <div className="min-w-0 flex-1">
               <div className="font-bold text-sm text-text leading-tight">SEOForge</div>
-              <div className="text-[0.65rem] text-muted leading-tight">Powered by Claude · usually replies in seconds</div>
+              <div className="text-[0.65rem] text-muted leading-tight">Instant answers · founder sees transcripts</div>
             </div>
             <button
               type="button"
@@ -262,7 +275,7 @@ export function ChatWidget() {
               </button>
             </div>
             <div className="text-[0.6rem] text-muted-2 mt-2 px-1">
-               may make mistakes. For billing, drop your email and a human will reply.
+              Need a human? Drop your email and Aubrey replies personally.
             </div>
           </div>
         </div>
