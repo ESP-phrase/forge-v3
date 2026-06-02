@@ -26,7 +26,7 @@ const TIERS: Tier[] = [
     tagline: "For the solo operator.",
     trialFee: 1,
     priceMo: 29,
-    priceYr: 23,
+    priceYr: 23,      // 29 × 0.8 = 23.20 → $23
     accent: false,
     cta: "Start 3-day trial",
     articles: "75 articles / mo",
@@ -44,7 +44,7 @@ const TIERS: Tier[] = [
     tagline: "Run a real portfolio.",
     trialFee: 10,
     priceMo: 79,
-    priceYr: 63,
+    priceYr: 63,      // 79 × 0.8 = 63.20 → $63
     accent: true,
     cta: "Start 3-day trial",
     articles: "250 articles / mo",
@@ -62,7 +62,7 @@ const TIERS: Tier[] = [
     tagline: "Scale across clients.",
     trialFee: 30,
     priceMo: 199,
-    priceYr: 159,
+    priceYr: 159,     // 199 × 0.8 = 159.20 → $159
     accent: false,
     cta: "Start 3-day trial",
     articles: "1,000 articles / mo",
