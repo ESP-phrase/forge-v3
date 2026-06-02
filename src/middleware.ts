@@ -5,7 +5,7 @@ const PUBLIC_PATHS = [
   "/login", "/signup", "/api/auth", "/api/cron", "/api/stripe", "/api/domains",
   "/api/og", "/api/chat", "/api/track", "/_next", "/_clarity", "/favicon",
   "/icon", "/apple-icon", "/opengraph-image", "/twitter-image", "/features",
-  "/pricing", "/testimonials", "/docs", "/blog", "/changelog", "/roadmap",
+  "/pricing", "/testimonials", "/docs", "/roadmap",
   "/affiliate",   "/privacy", "/terms", "/sitemap.xml", "/robots.txt", "/og.png", "/new",
   "/api/health",
 ];
@@ -13,7 +13,6 @@ const PUBLIC_EXACT = new Set(["/"]);
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const host = (req.headers.get("host") ?? "").toLowerCase().split(":")[0];
 
   // Affiliate tracking — ?r=ABC123 drops a 60-day cookie
   const refCode = req.nextUrl.searchParams.get("r");
@@ -37,18 +36,6 @@ export async function middleware(req: NextRequest) {
     const res = NextResponse.next();
     res.cookies.set("sf_ttclid", ttclid, { maxAge: 30 * 24 * 3600, sameSite: "lax", secure: true, path: "/" });
     return res;
-  }
-
-  // Blog subdomain routing: blog.seoforge.org → /blog/*
-  if (host.startsWith("blog.")) {
-    const isAsset = pathname.startsWith("/_next") || pathname.startsWith("/api") ||
-      pathname.startsWith("/favicon") || pathname === "/robots.txt" || pathname === "/sitemap.xml";
-    if (!isAsset && !pathname.startsWith("/blog")) {
-      const url = req.nextUrl.clone();
-      url.pathname = pathname === "/" ? "/blog" : `/blog${pathname}`;
-      return NextResponse.rewrite(url);
-    }
-    return NextResponse.next();
   }
 
   // Auth-protected route prefixes
