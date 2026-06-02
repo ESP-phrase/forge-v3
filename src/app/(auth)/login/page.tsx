@@ -19,7 +19,7 @@ export default async function LoginPage({
   const magicEmail = sp.email;
   const next = sp.next && sp.next.startsWith("/") && !sp.next.startsWith("//") ? sp.next : "";
   const showPassword = sp.showPassword === "1";
-  const showGoogle = isGoogleAuthConfigured();
+  const showGoogle = isGoogleAuthConfigured() && error !== "Configuration";
   const showGitHub = isGitHubAuthConfigured();
   const hasOAuth = showGoogle || showGitHub;
 
@@ -39,7 +39,9 @@ export default async function LoginPage({
         <div className="relative bg-card-grad rounded-2xl p-6 shadow-panel">
 
           {error ? (
-            <div className="bg-[rgba(248,113,113,0.12)] text-danger border border-[rgba(248,113,113,0.3)] rounded-lg px-3.5 py-2.5 mb-4 text-sm">{error}</div>
+            <div className="bg-[rgba(248,113,113,0.12)] text-danger border border-[rgba(248,113,113,0.3)] rounded-lg px-3.5 py-2.5 mb-4 text-sm">
+              {error === "Configuration" ? "Google sign-in is being set up. Use email below — it takes 5 seconds." : error}
+            </div>
           ) : null}
 
           {justSent ? (
