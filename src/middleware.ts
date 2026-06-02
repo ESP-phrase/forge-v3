@@ -5,7 +5,7 @@ const PUBLIC_PATHS = [
   "/login", "/signup", "/api/auth", "/api/cron", "/api/stripe", "/api/domains",
   "/api/og", "/api/chat", "/api/track", "/_next", "/_clarity", "/favicon",
   "/icon", "/apple-icon", "/opengraph-image", "/twitter-image", "/features",
-  "/pricing", "/testimonials", "/roadmap",
+  "/pricing", "/testimonials",
   "/affiliate",   "/privacy", "/terms", "/sitemap.xml", "/robots.txt", "/og.png", "/new",
   "/api/health",
 ];

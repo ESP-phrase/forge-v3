@@ -12,7 +12,6 @@ export function MarketingFooter() {
         </div>
         <div className="flex gap-6 flex-wrap">
           <Link href="/pricing" className="hover:text-text no-underline">Pricing</Link>
-          <Link href="/roadmap" className="hover:text-text no-underline">Roadmap</Link>
           <Link href="/affiliate" className="hover:text-text no-underline">Affiliate</Link>
           <Link href="/privacy" className="hover:text-text no-underline">Privacy</Link>
           <Link href="/terms" className="hover:text-text no-underline">Terms</Link>
