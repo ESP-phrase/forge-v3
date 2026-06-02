@@ -11,10 +11,6 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <div className="flex items-center justify-center gap-3 mb-7">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo2.png" alt="SEOForge" width={48} height={48} className="rounded-xl" />
-            <span className="font-extrabold text-3xl tracking-tight leading-none">
-              <span className="text-text">SEO</span>
-              <span className="text-accent">Forge</span>
-            </span>
           </div>
           {children}
         </div>
