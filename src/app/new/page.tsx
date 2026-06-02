@@ -120,40 +120,16 @@ export default function NewPage() {
           </p>
         </section>
 
-        {/* Shoutouts — made with these */}
-        <section className="mb-12">
-          <h2 className="text-xl font-extrabold text-center mb-2">Built on great tools</h2>
-          <p className="text-muted text-sm text-center mb-6">Each one gets a shoutout on their ProductHunt review page.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-xl mx-auto">
-            {[
-              { name: "Stripe", url: "https://www.producthunt.com/products/stripe", desc: "Payments & subscriptions engine" },
-              { name: "Resend", url: "https://www.producthunt.com/products/resend", desc: "Transactional email delivery" },
-              { name: "Creatify.ai", url: "https://www.producthunt.com/products/creatify", desc: "Ad creative generation" },
-            ].map((tool) => (
-              <a
-                key={tool.name}
-                href={tool.url}
-                target="_blank"
-                rel="noreferrer"
-                className="bg-card-grad border border-border rounded-xl p-4 text-center hover:border-accent-border transition-colors no-underline group"
-              >
-                <div className="font-bold text-text text-sm group-hover:text-accent transition-colors">{tool.name}</div>
-                <div className="text-muted text-xs mt-1">{tool.desc}</div>
-              </a>
-            ))}
-          </div>
-        </section>
-
         {/* Bottom CTA */}
         <section className="text-center">
           <div className="bg-card-grad border border-accent-border rounded-2xl p-8 shadow-glow">
             <h2 className="text-2xl font-extrabold mb-2">
-              Launch offer: <span className="text-accent">50% off</span> first month
+              Launch offer: <span className="text-accent">3 months free</span>
             </h2>
             <p className="text-muted text-sm mb-1">
-              Use code <code className="bg-surface-2 px-2 py-0.5 rounded text-accent font-bold">PH2026</code> at checkout
+              Use code <code className="bg-surface-2 px-2 py-0.5 rounded text-accent font-bold">PH10OFF</code> at checkout
             </p>
-            <p className="text-muted-2 text-xs mb-6">Valid for the first 50 customers</p>
+            <p className="text-muted-2 text-xs mb-6">100% off your first 3 months · 100 codes available</p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <LinkButton href="/pricing?utm_source=producthunt&coupon=PH2026" size="lg">
                 Start for $1 →
