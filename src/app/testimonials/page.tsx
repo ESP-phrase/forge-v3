@@ -65,25 +65,23 @@ export default function TestimonialsPage() {
 
         {/* Use cases */}
         <h2 className="text-2xl font-extrabold text-center mb-8">Who uses SEOForge</h2>
-        <div className="space-y-4 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
           {CASES.map((c) => (
-            <div key={c.title} className="bg-card-grad border border-border rounded-2xl p-6 md:p-8">
-              <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-10 items-start">
+            <div key={c.title} className="bg-card-grad border border-border rounded-2xl p-6 flex flex-col">
+              <h3 className="font-extrabold text-base mb-4 text-accent">{c.title}</h3>
+              <div className="flex-1 space-y-4">
                 <div>
-                  <div className="text-accent text-xs font-bold uppercase tracking-wider mb-1">Before</div>
-                  <p className="text-muted text-sm">{c.before}</p>
+                  <div className="text-muted-2 text-[0.6rem] uppercase tracking-wider font-bold mb-1.5">Before</div>
+                  <p className="text-muted text-sm leading-relaxed">{c.before}</p>
                 </div>
-                <div>
-                  <h3 className="font-extrabold text-lg mb-2">{c.title}</h3>
-                  <div className="bg-accent-dim border border-accent-border rounded-xl p-4 mb-3">
-                    <div className="text-accent text-xs font-bold uppercase tracking-wider mb-1">After</div>
-                    <p className="text-text text-sm font-semibold">{c.after}</p>
-                  </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    <span className="text-muted">{c.result}</span>
-                  </div>
+                <div className="bg-accent-dim border border-accent-border rounded-xl p-4">
+                  <div className="text-accent text-[0.6rem] uppercase tracking-wider font-bold mb-1.5">After</div>
+                  <p className="text-text text-sm font-semibold leading-relaxed">{c.after}</p>
                 </div>
+              </div>
+              <div className="mt-4 pt-4 border-t border-border flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                <span className="text-muted text-xs">{c.result}</span>
               </div>
             </div>
           ))}
