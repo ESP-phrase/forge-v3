@@ -1,7 +1,5 @@
 import Link from "next/link";
 import {
-  signInWithGoogleAction,
-  signInWithGitHubAction,
   signInWithPasswordAction,
   sendMagicLinkAction,
 } from "@/actions/auth";
@@ -54,29 +52,24 @@ export default async function LoginPage({
 
           {/* Step 1: Google — fastest */}
           {showGoogle ? (
-            <form action={signInWithGoogleAction} className="mb-4">
-              <button type="submit" className="w-full flex items-center justify-center gap-3 px-4 py-4 bg-white text-gray-900 rounded-xl font-extrabold text-base hover:bg-gray-100 transition-colors shadow-sm">
-                <svg width="20" height="20" viewBox="0 0 18 18" aria-hidden>
-                  <path fill="#4285F4" d="M16.51 8.18c0-.57-.05-1.13-.15-1.66H9v3.13h4.21c-.18.99-.74 1.83-1.58 2.39v1.97h2.55c1.49-1.38 2.34-3.41 2.34-5.83z" />
-                  <path fill="#34A853" d="M9 17c2.13 0 3.92-.71 5.23-1.92l-2.55-1.97c-.71.47-1.61.75-2.68.75-2.06 0-3.81-1.39-4.43-3.26H1.93v2.04C3.23 15.18 5.92 17 9 17z" />
-                  <path fill="#FBBC05" d="M4.57 10.6c-.16-.47-.25-.97-.25-1.5 0-.52.09-1.03.25-1.5V5.55H1.93C1.34 6.61 1 7.78 1 9.1c0 1.32.34 2.49.93 3.55l2.64-2.05z" />
-                  <path fill="#EA4335" d="M9 4.34c1.16 0 2.21.4 3.03 1.18l2.27-2.27C12.92 1.99 11.13 1.2 9 1.2 5.92 1.2 3.23 3.02 1.93 5.55l2.64 2.05C5.19 5.73 6.94 4.34 9 4.34z" />
-                </svg>
-                Continue with Google
-              </button>
-                <p className="text-center text-muted-2 text-xs mt-2">One click. No password.</p>
-            </form>
+            <a href="/api/auth/signin/google" className="mb-4 w-full flex items-center justify-center gap-3 px-4 py-4 bg-white text-gray-900 rounded-xl font-extrabold text-base hover:bg-gray-100 transition-colors shadow-sm no-underline">
+              <svg width="20" height="20" viewBox="0 0 18 18" aria-hidden>
+                <path fill="#4285F4" d="M16.51 8.18c0-.57-.05-1.13-.15-1.66H9v3.13h4.21c-.18.99-.74 1.83-1.58 2.39v1.97h2.55c1.49-1.38 2.34-3.41 2.34-5.83z" />
+                <path fill="#34A853" d="M9 17c2.13 0 3.92-.71 5.23-1.92l-2.55-1.97c-.71.47-1.61.75-2.68.75-2.06 0-3.81-1.39-4.43-3.26H1.93v2.04C3.23 15.18 5.92 17 9 17z" />
+                <path fill="#FBBC05" d="M4.57 10.6c-.16-.47-.25-.97-.25-1.5 0-.52.09-1.03.25-1.5V5.55H1.93C1.34 6.61 1 7.78 1 9.1c0 1.32.34 2.49.93 3.55l2.64-2.05z" />
+                <path fill="#EA4335" d="M9 4.34c1.16 0 2.21.4 3.03 1.18l2.27-2.27C12.92 1.99 11.13 1.2 9 1.2 5.92 1.2 3.23 3.02 1.93 5.55l2.64 2.05C5.19 5.73 6.94 4.34 9 4.34z" />
+              </svg>
+              Continue with Google
+            </a>
           ) : null}
 
           {showGitHub ? (
-            <form action={signInWithGitHubAction} className="mb-4">
-              <button type="submit" className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-[#1a1a1a] text-white border border-white/10 rounded-xl font-semibold text-sm hover:bg-[#2a2a2a] transition-colors">
-                <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
-                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-                </svg>
-                Continue with GitHub
-              </button>
-            </form>
+            <a href="/api/auth/signin/github" className="mb-4 w-full flex items-center justify-center gap-3 px-4 py-3 bg-[#1a1a1a] text-white border border-white/10 rounded-xl font-semibold text-sm hover:bg-[#2a2a2a] transition-colors no-underline">
+              <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden>
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+              </svg>
+              Continue with GitHub
+            </a>
           ) : null}
 
           {/* Divider */}

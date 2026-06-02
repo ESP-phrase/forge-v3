@@ -114,16 +114,8 @@ export async function signOutAction(): Promise<void> {
   redirect("/login");
 }
 
-export async function signInWithGoogleAction(): Promise<void> {
-  await signIn("google", { redirectTo: "/dashboard" });
-}
-
 export async function signInWithXAction(): Promise<void> {
   await signIn("twitter", { redirectTo: "/dashboard" });
-}
-
-export async function signInWithGitHubAction(): Promise<void> {
-  await signIn("github", { redirectTo: "/dashboard" });
 }
 
 // ── Magic link login ────────────────────────────────────────────────────
