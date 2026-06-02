@@ -24,11 +24,11 @@ const SECTIONS: { title: string; lines: string[] }[] = [
   {
     title: "Ad text — feature / value hooks",
     lines: [
-      "75 ranked articles to your your site site, on autopilot, every month.",
+      "75 ranked articles to your site, on autopilot, every month.",
       "Stop writing. Get 75 ranked articles published a month.",
       "Your niche site on autopilot. 75 ranked articles a month.",
       "Rank #1 without writing a word.",
-      "Your your site site, autopublished daily.",
+      "Your site, autopublished daily.",
       "Skip the writing. Keep the rankings.",
       "75 SEO articles to your site every month.",
       "$1 today gets you 75 articles a month.",
@@ -88,7 +88,7 @@ const SECTIONS: { title: string; lines: string[] }[] = [
   {
     title: "Microsoft Search Ads — descriptions (under 90 chars each)",
     lines: [
-      "Auto-publish 75 SEO articles to your your site site every month. $1 trial. Cancel anytime.",
+      "Auto-publish 75 SEO articles to your site every month. $1 trial. Cancel anytime.",
       "SERP-optimized articles auto-published to your site. Start for $1. 3-day trial.",
       "Stop juggling 6 SEO tools. One workspace handles research, writing, publishing, tracking.",
       "1,000+ operators publishing 75+ ranked articles a month. Start for $1, cancel before day 3.",

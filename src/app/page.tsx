@@ -65,18 +65,14 @@ export default async function LandingPage() {
           </div>
           <div className="flex items-center gap-4 mt-8">
             <div className="flex -space-x-2">
-              {(Array.from({length:4})).map((_, i) => (
-                <div
-                  key={i}
-                  className="w-9 h-9 rounded-full border-2 border-bg bg-surface-2 grid place-items-center text-muted text-xs font-bold"
-                >
-                  {(i + 1).toString()}
-                </div>
-              ))}
+              <div className="w-9 h-9 rounded-full border-2 border-bg bg-accent/20 grid place-items-center text-accent text-xs font-bold">J</div>
+              <div className="w-9 h-9 rounded-full border-2 border-bg bg-accent/20 grid place-items-center text-accent text-xs font-bold">M</div>
+              <div className="w-9 h-9 rounded-full border-2 border-bg bg-accent/20 grid place-items-center text-accent text-xs font-bold">S</div>
+              <div className="w-9 h-9 rounded-full border-2 border-bg bg-accent/20 grid place-items-center text-accent text-xs font-bold">A</div>
             </div>
             <div>
               <div className="text-text text-sm font-semibold">Indie & agency operators</div>
-              <div className="text-muted text-xs">Built by SEO operators, for SEO operators</div>
+              <div className="text-muted text-xs">Built by operators who got tired of writing</div>
             </div>
           </div>
         </div>
@@ -88,8 +84,8 @@ export default async function LandingPage() {
               focused on headline + trust strip + CTA. Clarity recordings
               showed dashboard rage-clicks; wrapping in Link drives accidental
               clicks to signup instead of nowhere. */}
-          <Link
-            href="/login?mode=signup"
+            <Link
+            href="/login"
             aria-label="Sign up to use the real dashboard"
             className="block no-underline cursor-pointer"
           >
@@ -105,25 +101,25 @@ export default async function LandingPage() {
             tone="lime"
             icon={<BoltIcon />}
             title="Content Generation"
-            body="Create high-quality, SEO-optimized content in seconds."
+            body="1,500-word SEO articles with FAQ schema, internal links, and rich formatting — published to your site."
           />
           <Feature
             tone="blue"
             icon={<GlobeFillIcon />}
             title="Multi-site Management"
-            body="Manage and scale content across unlimited websites."
+            body="Manage and scale SEO content across as many sites as you can run. One dashboard, no limits."
           />
           <Feature
             tone="amber"
             icon={<ChartIcon />}
             title="Performance Tracking"
-            body="Track rankings, traffic, and impressions in real time."
+            body="Track rankings, traffic, and impressions. See exactly which articles drive results."
           />
           <Feature
             tone="violet"
             icon={<RobotIcon />}
             title="Full Automation"
-            body="Queue keywords, schedule publishing, and grow on autopilot."
+            body="Queue keywords, schedule publishing, and grow organic traffic on autopilot."
           />
         </div>
       </section>
@@ -135,8 +131,8 @@ export default async function LandingPage() {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 opacity-80">
           {[
-            {           n: "Article Generation", t: "Powered by OpenRouter" },
-            { n: "your site", t: "REST API" },
+            {           n: "Article Generation", t: "OpenRouter" },
+            { n: "Publishing", t: "REST API" },
             { n: "Google Search Console", t: "Live data" },
             { n: "Next.js + Vercel", t: "Edge-fast" },
             { n: "Postgres · Neon", t: "Serverless DB" },
@@ -227,7 +223,7 @@ export default async function LandingPage() {
               }}
             />
             <Link
-              href="/login?mode=signup"
+              href="/login"
               aria-label="Sign up to use the real dashboard"
               className="relative rounded-3xl overflow-hidden block no-underline cursor-pointer"
             >
@@ -247,7 +243,7 @@ export default async function LandingPage() {
             Three steps. Zero babysitting.
           </h2>
           <p className="text-muted text-lg mt-3 max-w-xl mx-auto">
-            From empty your site site to ranked article — without writing a single word yourself.
+            From empty site to ranked article — without writing a single word yourself.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -255,7 +251,7 @@ export default async function LandingPage() {
             {
               step: "01",
               title: "Connect your site",
-              body: "Plug in your your site URL and an Application Password. We encrypt it with AES-256 and never store it in plaintext. Takes 60 seconds.",
+              body: "Plug in your site URL and credentials. We encrypt everything with AES-256 and never store in plaintext. Takes 60 seconds.",
             },
             {
               step: "02",
@@ -406,7 +402,7 @@ export default async function LandingPage() {
               your first site in under 60 seconds.
             </p>
             <div className="flex gap-3 mt-8 justify-center flex-wrap">
-              <LinkButton href="/login?mode=signup" size="lg">
+              <LinkButton href="/login" size="lg">
                 Start Free →
               </LinkButton>
               <LinkButton href="#pricing" variant="secondary" size="lg">
