@@ -25,11 +25,13 @@ export default async function LoginPage({
 
   return (
     <>
-      <div className="text-center mb-6">
-        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+      <div className="text-center mb-7">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo2.png" alt="SEOForge" width={56} height={56} className="mx-auto mb-5 rounded-xl" />
+        <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
           Sign in to <span className="text-accent">SEOForge</span>
         </h1>
-        <p className="text-muted text-sm mt-1.5">No password needed. Just your email.</p>
+        <p className="text-muted text-base mt-2">No password needed. Just your email.</p>
       </div>
 
       <div className="relative">
@@ -119,7 +121,7 @@ export default async function LoginPage({
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
-                <input name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="w-full pl-10 pr-3 py-2.5 bg-bg border border-border rounded-xl text-sm text-text focus:outline-none focus:border-accent-border placeholder:text-muted-2" />
+              <input name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="w-full pl-11 pr-4 py-3.5 bg-bg border border-border rounded-xl text-base text-text focus:outline-none focus:border-accent-border placeholder:text-muted-2" />
               </div>
               <div className="relative">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted" aria-hidden>
