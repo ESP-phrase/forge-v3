@@ -30,6 +30,7 @@ model User {
   stripeSubId       String?   @unique
   stripePriceId     String?
   planRenewsAt      DateTime?
+  trialStartsAt     DateTime? // variant B: when free trial began (null = variant A or post-conversion)
   articleCredits    Int       @default(10)
   articlesUsed      Int       @default(0)
 

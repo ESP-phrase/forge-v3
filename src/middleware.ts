@@ -6,7 +6,7 @@ const PUBLIC_PATHS = [
   "/api/og", "/api/chat", "/api/track", "/_next", "/_clarity", "/favicon",
   "/icon", "/apple-icon", "/opengraph-image", "/twitter-image", "/features",
   "/pricing", "/testimonials", "/docs", "/blog", "/changelog", "/roadmap",
-  "/affiliate", "/privacy", "/terms", "/sitemap.xml", "/robots.txt", "/og.png",
+  "/affiliate",   "/privacy", "/terms", "/sitemap.xml", "/robots.txt", "/og.png", "/new",
   "/api/health",
 ];
 const PUBLIC_EXACT = new Set(["/"]);
