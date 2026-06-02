@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import { StickyMobileCTA } from "@/components/marketing/StickyMobileCTA";
 
 const NAV: { href: string; label: string; icon: (className?: string) => React.ReactNode; dot?: boolean }[] = [
-  { href: "/features",     label: "Features",     icon: () => <BoltIcon /> },
   { href: "/pricing",      label: "Pricing",      icon: () => <TagIcon /> },
-  { href: "/testimonials", label: "Testimonials", icon: () => <ChatIcon /> },
+  { href: "/features",     label: "Features",     icon: () => <BoltIcon /> },
+  { href: "/faq",           label: "FAQ",          icon: () => <ChatIcon /> },
 ];
 
 export function MarketingHeader() {
