@@ -11,8 +11,6 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-const COLORS = ["#bef848", "#4ade80", "#60a5fa", "#fbbf24", "#a78bfa", "#fb7185"];
-
 const QUOTES = [
   {
     quote: "We went from 4 sites to 47 in a quarter. The pipeline just runs.",
@@ -69,29 +67,19 @@ export default function TestimonialsPage() {
               key={i}
               className="break-inside-avoid bg-card-grad border border-border rounded-2xl p-6 mb-5"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <img
-                  src={`https://ui-avatars.com/api/?name=${encodeURIComponent(q.name)}&background=${COLORS[i % COLORS.length].replace("#", "")}&color=0a0a0a&size=72&font-size=0.36&bold=true&format=png`}
-                  alt={q.name}
-                  width={36}
-                  height={36}
-                  className="rounded-full"
-                />
-                <div>
-                  <div className="font-semibold text-text text-sm">{q.name}</div>
-                  <div className="text-muted text-xs">{q.role}</div>
-                </div>
-              </div>
               <div className="text-accent text-2xl font-bold mb-2">&ldquo;</div>
               <blockquote
                 className="text-text leading-relaxed text-sm"
                 dangerouslySetInnerHTML={{ __html: q.quote }}
               />
+              <figcaption className="mt-4 pt-4 border-t border-border">
+                <div className="font-semibold text-text text-sm">{q.name}</div>
+                <div className="text-muted text-xs">{q.role}</div>
+              </figcaption>
             </figure>
           ))}
         </div>
 
-        {/* CTA */}
         <div className="text-center max-w-xl mx-auto mt-14 bg-card-grad border border-accent-border rounded-2xl p-10 shadow-glow">
           <h2 className="text-2xl font-extrabold tracking-tight mb-2">
             <span className="text-accent">Try it</span> for $1.
