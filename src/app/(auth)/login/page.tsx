@@ -26,6 +26,8 @@ export default async function LoginPage({
   return (
     <>
       <div className="text-center mb-7">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo2.png" alt="SEOForge" width={48} height={48} className="mx-auto mb-4 rounded-xl" />
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
           <span className="text-text">Sign in to </span>
           <span className="text-accent">SEOForge</span>
