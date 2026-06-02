@@ -73,7 +73,7 @@ export async function sendMagicLinkAction(formData: FormData): Promise<void> {
 
   // Send the magic link email
   const { sendMagicLinkEmail } = await import("@/lib/email");
-  void sendMagicLinkEmail(email, token, next);
+  await sendMagicLinkEmail(email, token, next);
 
   redirect(`/login?magic=1&email=${encodeURIComponent(email)}`);
 }
