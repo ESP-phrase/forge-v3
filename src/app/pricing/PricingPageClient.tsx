@@ -96,20 +96,20 @@ const FAQ = [
     a: "Every article is built from real SERP analysis of what's already ranking, runs through quality gates (word count, headings, FAQ, schema, internal links), and reads like a human wrote it — not generic blog spam.",
   },
   {
-    q: "Do I need my own API keys?",
-    a: "No. All plans include managed generation capacity. We handle the entire pipeline — you just connect your WordPress site and queue keywords.",
+    q: "How long does setup take?",
+    a: "About 60 seconds. Connect your site, queue a keyword, and your first article publishes in under 10 minutes. No API keys, no configuration.",
   },
   {
-    q: "Can I cancel anytime?",
-    a: "Yes. No contracts. Cancel from the dashboard, keep access through the end of your billing period. Your articles stay on your WordPress site forever — they're yours.",
+    q: "Can I use this with multiple sites?",
+    a: "Yes. Creator supports 3 sites, Operator supports 15, and Agency has unlimited sites. Each site gets its own settings, keywords, and publishing schedule.",
   },
   {
-    q: "Is there a money-back guarantee?",
-    a: "Yes. 7-day money-back guarantee on first-time subscriptions. If you're not happy, email us and we'll refund your subscription — no questions asked.",
+    q: "How much does each article cost?",
+    a: "Creator: ~$0.39/article ($29/mo for 75 articles). Operator: ~$0.32/article. Agency: ~$0.20/article. Overage is $0.45/$0.30/$0.15 per extra article.",
   },
   {
-    q: "What happens after the trial?",
-    a: "You get 3 days to try everything. Cancel before day 3 and you're never charged the monthly rate. If you stay, your subscription starts automatically — and you can cancel anytime after that too.",
+    q: "Can I edit articles before publishing?",
+    a: "Absolutely. Every article starts as a draft you can review, edit, and approve. Quality gates also hold back articles that don't meet your minimum word count or lack FAQ sections.",
   },
 ];
 
@@ -139,15 +139,31 @@ export default function PricingPageClient() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-1.5 bg-accent-dim text-accent border border-accent-border rounded-full px-3 py-1 text-xs uppercase tracking-wider font-bold mb-5">
-            {annual ? "Save 20% with annual billing" : `Starts at ${bestValue}`}
+            {annual ? "Save 20% with annual billing" : "Start for $1 today"}
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-            One plan. <span className="text-accent">All the content.</span>
+            Your first SEO article goes{" "}
+            <span className="text-accent">live in 10 minutes.</span>
           </h1>
           <p className="text-muted text-lg mt-4">
-            Your first article goes live in 10 minutes. Every plan includes keyword research,
-            SERP analysis, article generation, and WordPress auto-publish.
+            Every plan includes keyword research, SERP analysis, article generation, and auto-publish to your site.
           </p>
+
+          {/* Social proof */}
+          <div className="flex flex-wrap items-center justify-center gap-5 mt-4 text-xs text-muted">
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              Trusted by 500+ site operators
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              128K+ impressions generated
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+              Thousands of articles published
+            </span>
+          </div>
 
           {/* Billing toggle */}
           <div className="flex items-center justify-center gap-4 mt-6">
@@ -178,6 +194,36 @@ export default function PricingPageClient() {
             <span>Secured by Stripe</span>
             <span className="text-muted-2">·</span>
             <span>Cancel anytime</span>
+          </div>
+        </div>
+
+        {/* Risk reversal */}
+        <div className="flex flex-wrap items-center justify-center gap-5 mb-8 text-sm text-text font-semibold">
+          <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-accent" /> Start for $1</span>
+          <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-accent" /> Cancel anytime</span>
+          <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-accent" /> No credit check</span>
+          <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-accent" /> First article in 10 min</span>
+        </div>
+
+        {/* Cost comparison */}
+        <div className="max-w-lg mx-auto mb-10 bg-card-grad border border-border rounded-2xl p-5">
+          <div className="text-xs text-muted font-bold uppercase tracking-wider mb-3 text-center">Why $29/mo is a steal</div>
+          <div className="grid grid-cols-3 gap-3 text-center text-xs">
+            <div>
+              <div className="text-muted-2 mb-1">Typical SEO Agency</div>
+              <div className="text-text font-bold text-lg">$1,500+</div>
+              <div className="text-muted">per month</div>
+            </div>
+            <div>
+              <div className="text-muted-2 mb-1">Freelance Writer</div>
+              <div className="text-text font-bold text-lg">$100+</div>
+              <div className="text-muted">per article</div>
+            </div>
+            <div>
+              <div className="text-muted-2 mb-1">SEOForge</div>
+              <div className="text-accent font-extrabold text-lg">$0.39</div>
+              <div className="text-muted">per article</div>
+            </div>
           </div>
         </div>
 
@@ -319,13 +365,13 @@ export default function PricingPageClient() {
         <section className="text-center max-w-xl mx-auto">
           <div className="bg-card-grad border border-accent-border rounded-2xl p-10 shadow-glow">
             <h2 className="text-3xl font-extrabold tracking-tight mb-3">
-              Your first article <span className="text-accent">in 10 minutes.</span>
+              <span className="text-accent">$1 today.</span> First article in 10 minutes.
             </h2>
             <p className="text-muted text-base mb-6">
               Connect your site, queue a keyword, publish. It really is that fast.
             </p>
             <a href="#plans" className="inline-flex items-center gap-2 bg-accent text-black px-7 py-3.5 rounded-xl font-extrabold text-base no-underline hover:brightness-110 transition-all shadow-glow">
-              Pick your plan →
+              Start for $1 →
             </a>
             <p className="text-muted-2 text-xs mt-4">3-day trial · 7-day guarantee · Cancel anytime · No credit check</p>
           </div>
