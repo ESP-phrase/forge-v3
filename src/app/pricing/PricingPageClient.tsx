@@ -199,10 +199,10 @@ export default function PricingPageClient() {
 
         {/* Risk reversal */}
         <div className="flex flex-wrap items-center justify-center gap-5 mb-8 text-sm text-text font-semibold">
-          <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-accent" /> Start for $1</span>
-          <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-accent" /> Cancel anytime</span>
-          <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-accent" /> No credit check</span>
-          <span className="flex items-center gap-1.5"><Check className="w-4 h-4 text-accent" /> First article in 10 min</span>
+          <span className="flex items-center gap-1.5"><CheckMark /> Start for $1</span>
+          <span className="flex items-center gap-1.5"><CheckMark /> Cancel anytime</span>
+          <span className="flex items-center gap-1.5"><CheckMark /> No credit check</span>
+          <span className="flex items-center gap-1.5"><CheckMark /> First article in 10 min</span>
         </div>
 
         {/* Cost comparison */}
@@ -400,5 +400,13 @@ function Check() {
         <path d="m5 12 5 5 9-11" />
       </svg>
     </span>
+  );
+}
+
+function CheckMark() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#bef848" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="m5 12 5 5 9-11" />
+    </svg>
   );
 }
