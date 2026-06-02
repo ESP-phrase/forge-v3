@@ -8,10 +8,7 @@ const NAV: { href: string; label: string; icon: (className?: string) => React.Re
   { href: "/features",     label: "Features",     icon: () => <BoltIcon /> },
   { href: "/pricing",      label: "Pricing",      icon: () => <TagIcon /> },
   { href: "/testimonials", label: "Testimonials", icon: () => <ChatIcon /> },
-  { href: "/docs",         label: "Docs",         icon: () => <BookIcon /> },
-  { href: "/blog",         label: "Blog",         icon: () => <PencilIcon /> },
   { href: "/roadmap",      label: "Roadmap",      icon: () => <MapIcon /> },
-  { href: "/changelog",    label: "Changelog",    icon: () => <SparkleIcon />, dot: true },
 ];
 
 export function MarketingHeader() {
@@ -27,29 +24,9 @@ export function MarketingHeader() {
           <div className="px-3 md:px-4 py-2 flex items-center gap-2">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 font-extrabold no-underline shrink-0 px-1.5">
-              <svg width="36" height="36" viewBox="0 0 64 64" fill="none" aria-hidden>
-                <defs>
-                  <linearGradient id="mh-grad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#d4ff7a" />
-                    <stop offset="50%" stopColor="#b3f048" />
-                    <stop offset="100%" stopColor="#7bbf3a" />
-                  </linearGradient>
-                </defs>
-                <polygon
-                  points="32,5 55,18.5 55,45.5 32,59 9,45.5 9,18.5"
-                  fill="none"
-                  stroke="url(#mh-grad)"
-                  strokeWidth="3"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M44 22 a8 8 0 0 0 -8 -8 h-6 a8 8 0 0 0 0 16 h6 a8 8 0 0 1 0 16 h-6 a8 8 0 0 1 -8 -8"
-                  stroke="url(#mh-grad)"
-                  strokeWidth="7"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
+              <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden>
+                <rect width="64" height="64" rx="14" fill="#141414"/>
+                <text x="32" y="44" font-family="system-ui,-apple-system,sans-serif" font-size="32" font-weight="900" text-anchor="middle" fill="#bef848" letter-spacing="-1">SF</text>
               </svg>
               <span className="text-lg tracking-tight leading-none">
                 <span className="text-text">SEO</span>
@@ -91,16 +68,9 @@ export function MarketingHeader() {
             <div className="ml-auto flex items-center gap-2 shrink-0">
               <Link
                 href="/login"
-                className="inline-flex items-center gap-1.5 text-[0.82rem] font-semibold px-3.5 py-2 rounded-xl text-text bg-white/[0.03] border border-white/10 hover:bg-white/[0.06] no-underline transition-colors"
-              >
-                <UserIcon />
-                Sign in
-              </Link>
-              <Link
-                href="/login?mode=signup"
                 className="inline-flex items-center gap-1.5 text-[0.82rem] font-extrabold px-3.5 py-2 rounded-xl bg-accent text-black hover:bg-accent/90 no-underline transition-colors"
               >
-                Get started
+                Start free
                 <ArrowRightIcon />
               </Link>
             </div>
@@ -135,34 +105,12 @@ function ChatIcon() {
     </svg>
   );
 }
-function BookIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-    </svg>
-  );
-}
-function PencilIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z" />
-    </svg>
-  );
-}
 function MapIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6" />
       <line x1="8" y1="2" x2="8" y2="18" />
       <line x1="16" y1="6" x2="16" y2="22" />
-    </svg>
-  );
-}
-function SparkleIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z" />
     </svg>
   );
 }
