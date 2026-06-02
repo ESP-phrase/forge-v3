@@ -77,6 +77,7 @@ declare module "next-auth" {
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   debug: true,
+  trustHost: true,
   adapter: tolerantAdapter(),
   session: { strategy: "database", maxAge: 60 * 60 * 24 * 14 }, // 14 days
   pages: { signIn: "/login", error: "/login" },
