@@ -53,7 +53,7 @@ export default async function LoginPage({
           {/* Step 1: Google — fastest */}
           {showGoogle ? (
             <form action={signInWithGoogleAction} className="mb-4">
-              <button type="submit" className="w-full flex items-center justify-center gap-3 px-4 py-3.5 bg-white text-gray-900 rounded-xl font-bold text-sm hover:bg-gray-100 transition-colors shadow-sm border border-gray-200">
+              <button type="submit" className="w-full flex items-center justify-center gap-3 px-4 py-4 bg-white text-gray-900 rounded-xl font-extrabold text-base hover:bg-gray-100 transition-colors shadow-sm">
                 <svg width="20" height="20" viewBox="0 0 18 18" aria-hidden>
                   <path fill="#4285F4" d="M16.51 8.18c0-.57-.05-1.13-.15-1.66H9v3.13h4.21c-.18.99-.74 1.83-1.58 2.39v1.97h2.55c1.49-1.38 2.34-3.41 2.34-5.83z" />
                   <path fill="#34A853" d="M9 17c2.13 0 3.92-.71 5.23-1.92l-2.55-1.97c-.71.47-1.61.75-2.68.75-2.06 0-3.81-1.39-4.43-3.26H1.93v2.04C3.23 15.18 5.92 17 9 17z" />
@@ -62,7 +62,7 @@ export default async function LoginPage({
                 </svg>
                 Continue with Google
               </button>
-              <p className="text-center text-muted-2 text-[0.6rem] mt-1.5">One click. No password.</p>
+                <p className="text-center text-muted-2 text-xs mt-2">One click. No password.</p>
             </form>
           ) : null}
 
@@ -98,8 +98,8 @@ export default async function LoginPage({
             </div>
             <SubmitButton idleLabel="Send sign-in link" busyLabel="Sending…" />
           </form>
-          <p className="text-center text-muted-2 text-[0.6rem] mt-2">
-            We'll email you a link. Click it and you're signed in — no password needed.
+          <p className="text-center text-muted text-xs mt-3">
+            We'll email you a link. Click it — you're signed in. No password needed.
           </p>
 
           {/* Password — hidden */}
