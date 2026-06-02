@@ -77,7 +77,7 @@ export default async function StartPage({ searchParams }: { searchParams: Promis
         {/* 3-step compressed: horizontal on desktop, stacked on mobile */}
         <section className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
           {[
-            { n: "1", t: "Connect WordPress", b: "Site URL + Application Password. 60 seconds." },
+            { n: "1", t: "Connect your site", b: "Site URL + secure credentials. 60 seconds." },
             { n: "2", t: "Queue keywords", b: "We research and queue them for you." },
             { n: "3", t: "Articles publish daily", b: "Cron pushes live. You sleep — they rank." },
           ].map((s) => (

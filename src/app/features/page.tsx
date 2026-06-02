@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const FEATURES = [
   {
     title: "Multi-site management",
-    body: "One dashboard for unlimited WordPress sites. Each site has its own niche, audience, expert voice, daily cap, and credentials — all stored encrypted at rest.",
+    body: "One dashboard for unlimited sites. Each site has its own niche, audience, expert voice, daily cap, and credentials — all stored encrypted at rest.",
   },
   {
     title: "Keyword research",
@@ -27,15 +27,15 @@ const FEATURES = [
   },
   {
     title: "Quality gates",
-    body: "Articles below your minimum word count or missing FAQ are held back as drafts for human review. Nothing low-quality reaches WordPress automatically.",
+    body: "Articles below your minimum word count or missing FAQ are held back as drafts for human review. Nothing low-quality reaches your site automatically.",
   },
   {
     title: "Daily caps",
     body: "Per-site rate limits keep new domains under Google's spam radar. 1–2 articles/day at launch, scale up after 4–6 weeks of clean indexing.",
   },
   {
-    title: "WordPress publisher",
-    body: "REST API integration that creates posts, categories, and tags on the fly. Drafts go to your WP admin queue; flip to auto-publish when you're confident.",
+    title: "Auto-publish",
+    body: "REST API integration that creates posts, categories, and tags on the fly. Drafts go to your queue; flip to auto-publish when you're confident.",
   },
   {
     title: "Cost tracking",
@@ -58,7 +58,7 @@ export default function FeaturesPage() {
           </h1>
           <p className="text-muted text-lg mt-4">
             A single dashboard handles keyword research, article generation, internal linking,
-            publishing, and tracking — across as many WordPress sites as you can run.
+            publishing, and tracking — across as many sites as you can run.
           </p>
         </div>
         {/* 8 features — 4 cols on lg gives a perfect 4/4 split instead of 3/3/2 */}
