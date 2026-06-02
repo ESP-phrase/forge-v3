@@ -123,19 +123,12 @@ export default function NewPage() {
         {/* Shoutouts — made with these */}
         <section className="mb-12">
           <h2 className="text-xl font-extrabold text-center mb-2">Built on great tools</h2>
-          <p className="text-muted text-sm text-center mb-6">Each one earns a shoutout on their ProductHunt review page.</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <p className="text-muted text-sm text-center mb-6">Each one gets a shoutout on their ProductHunt review page.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-xl mx-auto">
             {[
-              { name: "Next.js", url: "https://www.producthunt.com/products/next-js", desc: "React framework" },
-              { name: "Vercel", url: "https://www.producthunt.com/products/vercel", desc: "Edge hosting" },
-              { name: "Stripe", url: "https://www.producthunt.com/products/stripe", desc: "Payments" },
-              { name: "OpenRouter", url: "https://www.producthunt.com/products/openrouter", desc: "Multi-model API" },
-              { name: "Prisma", url: "https://www.producthunt.com/products/prisma", desc: "Database ORM" },
-              { name: "Neon", url: "https://www.producthunt.com/products/neon", desc: "Serverless Postgres" },
-              { name: "Resend", url: "https://www.producthunt.com/products/resend", desc: "Email delivery" },
-              { name: "SerpApi", url: "https://www.producthunt.com/products/serpapi", desc: "SERP data" },
-              { name: "Unsplash", url: "https://www.producthunt.com/products/unsplash", desc: "Article images" },
-              { name: "Tailwind CSS", url: "https://www.producthunt.com/products/tailwind-css", desc: "Styling" },
+              { name: "Stripe", url: "https://www.producthunt.com/products/stripe", desc: "Payments & subscriptions engine" },
+              { name: "Resend", url: "https://www.producthunt.com/products/resend", desc: "Transactional email delivery" },
+              { name: "Creatify.ai", url: "https://www.producthunt.com/products/creatify", desc: "Ad creative generation" },
             ].map((tool) => (
               <a
                 key={tool.name}
