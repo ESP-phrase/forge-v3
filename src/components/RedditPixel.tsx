@@ -20,7 +20,7 @@ type Rdt = (...args: unknown[]) => void;
 
 // Hardcoded — pixel ID is public anyway (exposed to every page visitor).
 // Override via env if you ever rotate it.
-const PIXEL_ID = "a2_j0nbovdr0uc1";
+const PIXEL_ID = "a2_j42xoafz1bc2";
 
 export function RedditPixel({ email }: { email?: string }) {
   const id = process.env.NEXT_PUBLIC_REDDIT_PIXEL_ID || PIXEL_ID;
