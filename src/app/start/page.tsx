@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "75 SEO articles, autopublished — start for $1",
   description:
-    "Auto-publish 75 SEO-optimized articles to your WordPress site every month. 3-day trial for $1, cancel anytime.",
+    "Auto-publish 75 SEO-optimized articles to your site every month. 3-day trial for $1, cancel anytime.",
   alternates: { canonical: "/start" },
   robots: { index: false, follow: true },
 };
@@ -41,7 +41,7 @@ export default async function StartPage({ searchParams }: { searchParams: Promis
             <span className="text-accent">published while you sleep.</span>
           </h1>
           <p className="text-muted text-base md:text-lg mt-4 max-w-xl mx-auto">
-            Queue a keyword. We write a 1,500-word article and auto-publish it to your WordPress site — in under 10 minutes.
+            Queue a keyword. We write a 1,500-word article and auto-publish it to your site — in under 10 minutes.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
             <LinkButton href={cta} size="lg">Start for $1 →</LinkButton>

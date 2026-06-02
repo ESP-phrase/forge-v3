@@ -24,11 +24,11 @@ const SECTIONS: { title: string; lines: string[] }[] = [
   {
     title: "Ad text — feature / value hooks",
     lines: [
-      "75 ranked articles to your WordPress site, on autopilot, every month.",
+      "75 ranked articles to your your site site, on autopilot, every month.",
       "Stop writing. Get 75 ranked articles published a month.",
       "Your niche site on autopilot. 75 ranked articles a month.",
       "Rank #1 without writing a word.",
-      "Your WordPress site, autopublished daily.",
+      "Your your site site, autopublished daily.",
       "Skip the writing. Keep the rankings.",
       "75 SEO articles to your site every month.",
       "$1 today gets you 75 articles a month.",
@@ -75,9 +75,9 @@ const SECTIONS: { title: string; lines: string[] }[] = [
   {
     title: "Microsoft Search Ads — high-intent keyword headlines (under 30 chars each)",
     lines: [
-      "Auto-Publish Blog Posts to WordPress",
+      "Auto-Publish Blog Posts to your site",
       "75 SEO Articles a Month",
-      "WordPress on Autopilot",
+      "your site on Autopilot",
       "Skip the Writing. Rank.",
       "$1 to Start. Cancel Free.",
       "Auto-Publish SEO Content",
@@ -88,8 +88,8 @@ const SECTIONS: { title: string; lines: string[] }[] = [
   {
     title: "Microsoft Search Ads — descriptions (under 90 chars each)",
     lines: [
-      "Auto-publish 75 SEO articles to your WordPress site every month. $1 trial. Cancel anytime.",
-      "SERP-optimized articles auto-published to WordPress. Start for $1. 3-day trial.",
+      "Auto-publish 75 SEO articles to your your site site every month. $1 trial. Cancel anytime.",
+      "SERP-optimized articles auto-published to your site. Start for $1. 3-day trial.",
       "Stop juggling 6 SEO tools. One workspace handles research, writing, publishing, tracking.",
       "1,000+ operators publishing 75+ ranked articles a month. Start for $1, cancel before day 3.",
     ],
@@ -99,11 +99,11 @@ const SECTIONS: { title: string; lines: string[] }[] = [
     lines: [
       "ai seo content tool",
       "auto blog post generator",
-      "wordpress ai content plugin",
+      "your site ai content plugin",
       "ai content for seo",
       "automated seo article writer",
       "ai blog automation",
-      "wordpress auto publish ai",
+      "your site auto publish ai",
       "ai content marketing tool",
       "best ai writer for seo",
       "ai seo article generator",
@@ -113,7 +113,7 @@ const SECTIONS: { title: string; lines: string[] }[] = [
     title: "Short hooks (for quick A/B tweaks)",
     lines: [
       "Stop writing. Start ranking.",
-      "WordPress, on autopilot.",
+      "your site, on autopilot.",
       "75 articles / month.",
       "Cancel anytime.",
     ],

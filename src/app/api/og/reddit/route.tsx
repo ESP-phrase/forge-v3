@@ -26,7 +26,7 @@ const VARIANTS: Record<string, Variant> = {
   "1": {
     headline: "Built this because writers cost $150/article.",
     subhead:
-      " generates 1,500-word SEO articles. Schema, internal links, topic clusters — auto-published to WordPress. Free plan.",
+      " generates 1,500-word SEO articles. Schema, internal links, topic clusters — auto-published to your site. Free plan.",
     statLabel: "Cost per article",
     statValue: "$0.30",
     statCaption: "vs. $150 from a freelance writer.",
@@ -34,7 +34,7 @@ const VARIANTS: Record<string, Variant> = {
   "2": {
     headline: "10 minutes from signup to first ranked article.",
     subhead:
-      "Connect WordPress. Queue keywords.  writes + publishes. Free Hobby plan, no card.",
+      "Connect your site. Queue keywords.  writes + publishes. Free Hobby plan, no card.",
     statLabel: "Setup time",
     statValue: "10 min",
     statCaption: "First article live, indexed, in your feed.",
@@ -42,7 +42,7 @@ const VARIANTS: Record<string, Variant> = {
   "3": {
     headline: "150 SEO articles a month. $29.",
     subhead:
-      "Topic clusters, SERP gap analysis, schema markup, internal linking — auto-published to WordPress on a daily cron.",
+      "Topic clusters, SERP gap analysis, schema markup, internal linking — auto-published to your site on a daily cron.",
     statLabel: "Articles / month",
     statValue: "150",
     statCaption: "on the Operator plan ($29/mo).",

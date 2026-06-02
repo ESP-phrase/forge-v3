@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Features — Topic clusters, GSC, auto-publish, anchor analysis",
   description:
-    "Every SEO feature SEOForge ships: cluster planner, SERP gap analysis, WordPress auto-publish, Google Search Console, anchor-text diversity, backlink outreach, internal linking, schema markup.",
+    "Every SEO feature SEOForge ships: cluster planner, SERP gap analysis, auto-publish, Google Search Console, anchor-text diversity, backlink outreach, internal linking, schema markup.",
   alternates: { canonical: "/features" },
 };
 

@@ -18,7 +18,7 @@ const BEFORE = {
     { kpi: "$150", text: "per 1,500-word article" },
     { kpi: "3-5 days", text: "writer turnaround" },
     { kpi: "Hours", text: "researching keywords" },
-    { kpi: "Manual", text: "WordPress upload + schema" },
+    { kpi: "Manual", text: "your site upload + schema" },
     { kpi: "Maybe", text: "internal links done right" },
   ],
 };
@@ -29,7 +29,7 @@ const AFTER = {
     { kpi: "$0.30", text: "per 1,500-word article" },
     { kpi: "30 sec", text: " generates + publishes" },
     { kpi: "Auto", text: "SERP gap analysis built in" },
-    { kpi: "Auto", text: "WordPress publish + FAQ schema" },
+    { kpi: "Auto", text: "your site publish + FAQ schema" },
     { kpi: "Auto", text: "internal linking across cluster" },
   ],
 };

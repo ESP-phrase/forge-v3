@@ -68,7 +68,7 @@ export async function sendWelcomeEmail(to: string, name?: string | null) {
       <p style="margin:0 0 14px;color:#ccc">Your account is live. You're on the free Hobby plan with <strong style="color:#bef848">10 articles/month</strong> to test the pipeline.</p>
       <p style="margin:0 0 20px;color:#ccc">Three quick things to do first:</p>
       <ol style="margin:0 0 24px;padding-left:20px;color:#ccc">
-        <li style="margin-bottom:8px"><a href="${APP_URL}/sites/new" style="color:#bef848">Add your first site</a> — WordPress install or our hosted blog (30s).</li>
+        <li style="margin-bottom:8px"><a href="${APP_URL}/sites/new" style="color:#bef848">Add your first site</a> — your site install or your site (30s).</li>
         <li style="margin-bottom:8px"><a href="${APP_URL}/sites/1/cluster" style="color:#bef848">Plan a cluster</a> — Claude designs a 12-article topic cluster around any pillar.</li>
         <li>Click <strong style="color:#fff">Run now</strong> — your first article publishes in ~30 seconds.</li>
       </ol>

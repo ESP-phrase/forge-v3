@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "SEO content on autopilot — generate, optimize, publish",
   description:
-    "SEOForge generates SEO-optimized articles, runs SERP gap analysis, builds topic clusters, and auto-publishes to WordPress or native blogs. Start 3-day trial for $1.",
+    "SEOForge generates SEO-optimized articles, runs SERP gap analysis, builds topic clusters, and auto-publishes to your site. Start 3-day trial for $1.",
   alternates: { canonical: "/" },
 };
 
@@ -40,7 +40,7 @@ export default async function LandingPage() {
           </h1>
           <p className="text-muted text-lg mt-5 max-w-md">
             Queue a keyword. Get a 1,500-word, SERP-optimized article auto-published to your
-            WordPress site — in under 10 minutes.
+            site — in under 10 minutes.
           </p>
           <div className="flex gap-3 mt-7 flex-wrap items-center">
             <LinkButton href="/pricing" size="lg">
@@ -136,7 +136,7 @@ export default async function LandingPage() {
         <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 opacity-80">
           {[
             {           n: "Article Generation", t: "Powered by OpenRouter" },
-            { n: "WordPress", t: "REST API" },
+            { n: "your site", t: "REST API" },
             { n: "Google Search Console", t: "Live data" },
             { n: "Next.js + Vercel", t: "Edge-fast" },
             { n: "Postgres · Neon", t: "Serverless DB" },
@@ -247,7 +247,7 @@ export default async function LandingPage() {
             Three steps. Zero babysitting.
           </h2>
           <p className="text-muted text-lg mt-3 max-w-xl mx-auto">
-            From empty WordPress site to ranked article — without writing a single word yourself.
+            From empty your site site to ranked article — without writing a single word yourself.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -255,17 +255,17 @@ export default async function LandingPage() {
             {
               step: "01",
               title: "Connect your site",
-              body: "Plug in your WordPress URL and an Application Password. We encrypt it with AES-256 and never store it in plaintext. Takes 60 seconds.",
+              body: "Plug in your your site URL and an Application Password. We encrypt it with AES-256 and never store it in plaintext. Takes 60 seconds.",
             },
             {
               step: "02",
               title: "Queue keywords",
-              body: "Type a topic. We research keywords, run SERP gap analysis so every article targets what actually ranks, and publish to WordPress automatically.",
+              body: "Type a topic. We research keywords, run SERP gap analysis so every article targets what actually ranks, and publish to your site automatically.",
             },
             {
               step: "03",
               title: "Publish on autopilot",
-              body: "A daily cron generates the article, runs quality gates (1,500+ words, internal links, FAQ schema), and pushes it live to WordPress.",
+              body: "A daily cron generates the article, runs quality gates (1,500+ words, internal links, FAQ schema), and pushes it live to your site.",
             },
           ].map((s) => (
             <div
@@ -304,7 +304,7 @@ export default async function LandingPage() {
                 "3 sites",
                 "75 articles / month",
                 "Keyword research",
-                "WordPress auto-publish",
+                "your site auto-publish",
                 "Overage $0.45 / article",
               ],
               cta: "Start 3-day trial",

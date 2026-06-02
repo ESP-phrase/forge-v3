@@ -34,7 +34,7 @@ const TIERS: Tier[] = [
     features: [
       "Keyword research + SERP analysis",
       "1,500-word SEO articles",
-      "WordPress auto-publish",
+      "Auto-publish",
       "Quality gates + drafts review",
       "Activity log + cost tracking",
     ],
@@ -78,7 +78,7 @@ const TIERS: Tier[] = [
 ];
 
 const COMPARE: { label: string; values: (string | boolean)[] }[] = [
-  { label: "WordPress auto-publish", values: [true, true, true] },
+    { label: "Auto-publish", values: [true, true, true] },
   { label: "Keyword research", values: [true, true, true] },
   { label: "SERP gap analysis", values: [true, true, true] },
   { label: "Internal linking", values: [true, true, true] },

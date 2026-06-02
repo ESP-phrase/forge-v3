@@ -13,7 +13,7 @@ const SITE = "https://www.seoforge.org";
 const SITE_NAME = "SEOForge";
 const DEFAULT_TITLE = "SEOForge — SEO content on autopilot";
 const DEFAULT_DESC =
-  "Generate, optimize, and auto-publish SEO articles to WordPress and native blogs. Topic clusters, schema, internal linking, GSC, and analytics — built for indie operators and agencies.";
+  "Generate, optimize, and auto-publish SEO articles to your site and your blogs. Topic clusters, schema, internal linking, GSC, and analytics — built for indie operators and agencies.";
 const OG_IMAGE = `${SITE}/opengraph-image`;
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   keywords: [
     "SEO content",
     "content generation",
-    "WordPress auto-publish",
+    "your site auto-publish",
     "programmatic SEO",
     "SEO automation",
     "topic clusters",

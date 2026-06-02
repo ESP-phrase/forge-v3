@@ -24,7 +24,7 @@ export default async function NewSitePage({
             {[
               {
                 title: "Connect your site",
-                body: "Securely connect your WordPress site or choose our hosted blog.",
+                body: "Securely connect your your site site or choose our hosted blog.",
               },
               {
                 title: "We verify access",
@@ -64,7 +64,7 @@ export default async function NewSitePage({
                   Use an application password
                 </div>
                 <div className="text-muted text-xs mt-0.5 leading-snug">
-                  Create one in your WordPress profile for better security.
+                  Create one in your your site profile for better security.
                 </div>
               </div>
             </li>

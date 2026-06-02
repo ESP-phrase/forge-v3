@@ -84,7 +84,7 @@ export async function ToolsHub() {
             Add another site
           </div>
           <div className="text-muted text-xs leading-snug">
-            New WordPress install or native blog. Takes 30 seconds.
+            New site or blog. Takes 30 seconds.
           </div>
         </Link>
         {TOOLS.map((t) => (

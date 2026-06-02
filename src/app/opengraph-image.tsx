@@ -102,13 +102,13 @@ export default function OGImage() {
             marginBottom: 56,
           }}
         >
-          Generate, optimize, and publish  articles to WordPress and native blogs.
+          Generate, optimize, and publish  articles to your site and your blogs.
           Topic clusters, schema, internal linking.
         </div>
 
         {/* Bottom row — feature chips */}
         <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-          {["$0.30 / article", "Free Hobby plan", "WordPress + Native", "Cancel anytime"].map(
+          {["$0.30 / article", "Free Hobby plan", "your site + Native", "Cancel anytime"].map(
             (chip) => (
               <div
                 key={chip}

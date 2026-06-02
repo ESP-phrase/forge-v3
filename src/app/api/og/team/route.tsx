@@ -17,7 +17,7 @@ export const runtime = "edge";
 const TEAM = [
   { initials: "AN", name: "Aubrey N.", role: "Founder · SEO Operator", color: "#bef848" },
   { initials: "", name: "Claude", role: " Content Engineer", color: "#a855f7" },
-  { initials: "WP", name: "WordPress", role: "Publishing Pipeline", color: "#0ea5e9" },
+  { initials: "WP", name: "your site", role: "Publishing Pipeline", color: "#0ea5e9" },
   { initials: "GS", name: "Search Console", role: "Performance Tracker", color: "#22c55e" },
 ];
 

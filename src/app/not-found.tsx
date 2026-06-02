@@ -93,7 +93,7 @@ const DESTINATIONS = [
     section: "Learn",
     href: "/docs",
     title: "Docs",
-    body: "How to connect WordPress and queue keywords.",
+    body: "How to connect your site and queue keywords.",
   },
   {
     section: "Company",

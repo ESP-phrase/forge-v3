@@ -50,7 +50,7 @@ async function pickStep(): Promise<Step> {
     return {
       badge: "🌱",
       title: "Add your first site",
-      body: "SEOForge needs a target — a WordPress install or our native blog hosting. Takes 30 seconds for native, ~2 min for WordPress.",
+      body: "SEOForge needs a target — a your site install or your existing site. Takes 30 seconds for native, ~2 min for your site.",
       cta: "Add a site",
       href: "/sites/new",
       accent: true,

@@ -56,7 +56,7 @@ export function scoreArticle(
   // Published?
   checks.push({
     id: "published",
-    label: "Live on WordPress",
+    label: "Published",
     pass: a.status === "published" && !!a.publishedAt,
     weight: 3,
     hint: "Not visible to Google until you publish to WP.",
