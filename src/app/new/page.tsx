@@ -6,10 +6,15 @@ import { LinkButton } from "@/components/Button";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "SEOForge — New",
-  description: "SEO articles, written and published. $1 start.",
-  alternates: { canonical: "/" },
-  robots: { index: false, follow: true },
+  title: "New — SEOForge",
+  description: "SEO articles, written and published. $1 start. No writing required.",
+  alternates: { canonical: "/new" },
+  robots: { index: true, follow: true },
+  openGraph: {
+    title: "SEOForge — SEO articles, written and published",
+    description: "Ranked articles on autopilot. $1 to start. ProductHunt launch.",
+    type: "website",
+  },
 };
 
 export default function NewPage() {
