@@ -8,6 +8,7 @@ const NAV: { href: string; label: string; icon: (className?: string) => React.Re
   { href: "/pricing",      label: "Pricing",      icon: () => <TagIcon /> },
   { href: "/features",     label: "Features",     icon: () => <BoltIcon /> },
   { href: "/faq",           label: "FAQ",          icon: () => <ChatIcon /> },
+  { href: "/testimonials", label: "Stories",      icon: () => <BookIcon /> },
 ];
 
 export function MarketingHeader() {
@@ -99,6 +100,14 @@ function ChatIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  );
+}
+function BookIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
     </svg>
   );
 }
