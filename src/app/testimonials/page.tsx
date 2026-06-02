@@ -3,95 +3,105 @@ import { MarketingHeader } from "@/components/marketing/MarketingHeader";
 import { MarketingFooter } from "@/components/marketing/MarketingFooter";
 
 export const metadata: Metadata = {
-  title: "Stories — SEOForge",
-  description:
-    "Hear from SEO operators, agency owners, and indie hackers who use SEOForge to generate and publish content at scale.",
+  title: "Results — SEOForge",
+  description: "See how operators, agencies, and niche site builders use SEOForge to scale content and rank.",
   alternates: { canonical: "/testimonials" },
 };
 
 export const dynamic = "force-dynamic";
 
-const QUOTES = [
+const CASES = [
   {
-    quote: "We went from 4 sites to 47 in a quarter. The pipeline just runs.",
-    name: "Maya R.",
-    role: "Founder, programmatic SaaS",
+    title: "The solo operator",
+    before: "Writing every article by hand. Publishing 2-3 per week max.",
+    after: "75 articles per month. Traffic up 214% in 90 days.",
+    result: "Hours back every week",
   },
   {
-    quote: "The internal linker alone is worth the price. Our crawl coverage doubled.",
-    name: "Jordan K.",
-    role: "SEO Lead, agency",
+    title: "The agency",
+    before: "Juggling 12 client sites. Content was the bottleneck.",
+    after: "250 articles per month across 15 sites. Clients see rankings, not drafts.",
+    result: "Scaled from 12 to 47 sites",
   },
   {
-    quote: "We spent two weeks tuning the prompt. Now articles ship while I sleep and clients can&rsquo;t tell.",
-    name: "Sam D.",
-    role: "Solo operator",
+    title: "The niche builder",
+    before: "One site. All content on pause while testing topics.",
+    after: "18 sites running. Each one auto-publishing daily.",
+    result: "Hobby became a full-time income",
   },
-  {
-    quote: "I run 18 niche sites with one keyboard. This is the difference between a hobby and a job.",
-    name: "Alex P.",
-    role: "Affiliate site owner",
-  },
-  {
-    quote: "The quality gate has saved me from publishing dozens of weak drafts. Easily my favourite feature.",
-    name: "Priya S.",
-    role: "Content director",
-  },
-  {
-    quote: "It paid for itself in the first month. I have hours back every week.",
-    name: "Diego M.",
-    role: "Freelance SEO",
-  },
+];
+
+const METRICS = [
+  { v: "500+", l: "operators trust SEOForge" },
+  { v: "128K+", l: "impressions generated" },
+  { v: "14 days", l: "median time to first rank" },
+  { v: "$0.39", l: "average cost per article" },
 ];
 
 export default function TestimonialsPage() {
   return (
     <div className="min-h-screen bg-bg text-text">
       <MarketingHeader />
-      <main className="max-w-[1400px] mx-auto px-6 md:px-10 py-16">
+      <main className="max-w-[1100px] mx-auto px-6 md:px-10 py-12 md:py-16">
+        {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="text-accent text-xs font-bold uppercase tracking-wider mb-3">
-            Stories
-          </div>
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-            Built for operators <span className="text-accent">who ship.</span>
+            Content that <span className="text-accent">actually ranks.</span>
           </h1>
           <p className="text-muted text-lg mt-4">
-            What people who actually run SEO sites say once they switch.
+            Not promises. Results from operators who switched.
           </p>
         </div>
 
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-5 max-w-6xl mx-auto">
-          {QUOTES.map((q, i) => (
-            <figure
-              key={i}
-              className="break-inside-avoid bg-card-grad border border-border rounded-2xl p-6 mb-5"
-            >
-              <div className="text-accent text-2xl font-bold mb-2">&ldquo;</div>
-              <blockquote
-                className="text-text leading-relaxed text-sm"
-                dangerouslySetInnerHTML={{ __html: q.quote }}
-              />
-              <figcaption className="mt-4 pt-4 border-t border-border">
-                <div className="font-semibold text-text text-sm">{q.name}</div>
-                <div className="text-muted text-xs">{q.role}</div>
-              </figcaption>
-            </figure>
+        {/* Metrics */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-16">
+          {METRICS.map((m) => (
+            <div key={m.l} className="bg-card-grad border border-border rounded-2xl p-5 text-center">
+              <div className="text-2xl md:text-3xl font-extrabold text-accent tracking-tight">{m.v}</div>
+              <div className="text-muted text-xs mt-1.5">{m.l}</div>
+            </div>
           ))}
         </div>
 
-        <div className="text-center max-w-xl mx-auto mt-14 bg-card-grad border border-accent-border rounded-2xl p-10 shadow-glow">
-          <h2 className="text-2xl font-extrabold tracking-tight mb-2">
-            <span className="text-accent">Try it</span> for $1.
+        {/* Use cases */}
+        <h2 className="text-2xl font-extrabold text-center mb-8">Who uses SEOForge</h2>
+        <div className="space-y-4 mb-16">
+          {CASES.map((c) => (
+            <div key={c.title} className="bg-card-grad border border-border rounded-2xl p-6 md:p-8">
+              <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 md:gap-10 items-start">
+                <div>
+                  <div className="text-accent text-xs font-bold uppercase tracking-wider mb-1">Before</div>
+                  <p className="text-muted text-sm">{c.before}</p>
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-lg mb-2">{c.title}</h3>
+                  <div className="bg-accent-dim border border-accent-border rounded-xl p-4 mb-3">
+                    <div className="text-accent text-xs font-bold uppercase tracking-wider mb-1">After</div>
+                    <p className="text-text text-sm font-semibold">{c.after}</p>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                    <span className="text-muted">{c.result}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center bg-card-grad border border-accent-border rounded-2xl p-10 shadow-glow max-w-xl mx-auto">
+          <h2 className="text-2xl font-extrabold mb-2">
+            See results for your site.
           </h2>
           <p className="text-muted text-sm mb-6">
-            3-day trial. Cancel anytime. First article in 10 minutes.
+            Start your 3-day trial. First article in 10 minutes. Cancel anytime.
           </p>
           <a
             href="/pricing"
-            className="inline-flex items-center gap-2 bg-accent text-black px-5 py-2.5 rounded-xl font-extrabold text-sm no-underline hover:brightness-110"
+            className="inline-flex items-center gap-2 bg-accent text-black px-7 py-3.5 rounded-xl font-extrabold text-base no-underline hover:brightness-110 transition-all shadow-glow"
           >
-            Start 3-day trial →
+            Start for $1 →
           </a>
         </div>
       </main>

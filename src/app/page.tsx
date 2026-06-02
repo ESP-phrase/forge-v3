@@ -63,18 +63,6 @@ export default async function LandingPage() {
               <CheckBadge /> First article in 10 min
             </span>
           </div>
-          <div className="flex items-center gap-4 mt-8">
-            <div className="flex -space-x-2">
-              <div className="w-9 h-9 rounded-full border-2 border-bg bg-accent/20 grid place-items-center text-accent text-xs font-bold">J</div>
-              <div className="w-9 h-9 rounded-full border-2 border-bg bg-accent/20 grid place-items-center text-accent text-xs font-bold">M</div>
-              <div className="w-9 h-9 rounded-full border-2 border-bg bg-accent/20 grid place-items-center text-accent text-xs font-bold">S</div>
-              <div className="w-9 h-9 rounded-full border-2 border-bg bg-accent/20 grid place-items-center text-accent text-xs font-bold">A</div>
-            </div>
-            <div>
-              <div className="text-text text-sm font-semibold">Indie & agency operators</div>
-              <div className="text-muted text-xs">Built by operators who got tired of writing</div>
-            </div>
-          </div>
         </div>
 
         <div className="lg:col-span-7 relative hidden md:block">
