@@ -23,10 +23,8 @@ export function MarketingHeader() {
           <div className="px-3 md:px-4 py-2 flex items-center gap-2">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 font-extrabold no-underline shrink-0 px-1.5">
-              <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden>
-                <rect width="64" height="64" rx="14" fill="#141414"/>
-                <text x="32" y="44" font-family="system-ui,-apple-system,sans-serif" font-size="32" font-weight="900" text-anchor="middle" fill="#bef848" letter-spacing="-1">SF</text>
-              </svg>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo2.png" alt="SEOForge" width={34} height={34} className="rounded-lg" />
               <span className="text-lg tracking-tight leading-none">
                 <span className="text-text">SEO</span>
                 <span className="text-accent">Forge</span>
